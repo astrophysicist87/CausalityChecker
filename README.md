@@ -3,11 +3,9 @@
 ## Installation
 
 Just type:
-```gmake distclean && gmake all
-```
+```gmake distclean && gmake all```
 
 ## Running
 
 Just type:
-```./check_causality /path/to/file/to/check
-```
+```./check_causality /path/to/file/to/check```
