@@ -35,8 +35,6 @@ double delta_PiPi, lambda_Pipi, delta_pipi, lambda_piPi,
 double Lambda_0, Lambda_1, Lambda_2, Lambda_3;
 
 bool get_sorted_eigenvalues_of_pi_mu_nu(
-		/*const double pi00, const double pi01, const double pi02, const double pi11,
-		const double pi12, const double pi22, const double pi33,*/
 		double & Lambda_0, double & Lambda_1, double & Lambda_2, double & Lambda_3 );
 
 int main(int argc, char *argv[])
@@ -47,10 +45,21 @@ int main(int argc, char *argv[])
 	// check input first
 	if (argc < 2)
 	{
-		//cerr << "Usage: ./check_causality path_to_input_file" << endl;
+		cout << "<<<=========================================================>>>" << endl;
+		cout << "Usage: ./check_causality path_to_input_file" << endl << endl;
+		cout << "---------------------------------------------------------------"
+			 << endl << "Output per row:" << endl;
+		cout << "[necessary conditions passed (binary)] " << endl
+                "[sufficient conditions passed (binary)] " << endl
+                "tau x y T e [all units in fm] " << endl
+                "[all pre-conditions satisfied (binary)] " << endl
+                "[diagonalization succeeded (binary)] " << endl << endl;
+		cout << "<<<=========================================================>>>" << endl;
+
 		//exit(1);
 		test_mode = true;
-
+		
+		cout << "----- Printing out diagnostic information below this line -----" << endl;
 		cout << setprecision(12);
 
 		// Run test - just pick some values
@@ -59,8 +68,9 @@ int main(int argc, char *argv[])
 		pi12 = 0.00048869; pi22 = 0.2144; pi33 = -0.42917;
 		//Lambda_0 = 0.0; Lambda_1 = -0.42917; Lambda_2 = 0.214173; Lambda_3 = 0.215151;
 		double rands[13] = {0.7486510936, 0.7832718015, 0.6676001377, 0.6540939720, 
-0.1373497793, 0.1484691683, 0.9348005828, 0.7079133674, 0.9495418450, 
-0.3749321713, 0.4646400815, 0.8826349161, 0.6741853064};
+							0.1373497793, 0.1484691683, 0.9348005828, 0.7079133674,
+							0.9495418450, 0.3749321713, 0.4646400815, 0.8826349161,
+							0.6741853064};
 		/*e = 0.835978; p = 0.891412; Pi = 0.649474; tau_pi = 0.977974; tau_Pi = 0.756016;
 		eta = 0.203962; zeta = 0.776212; tau_pipi = 0.0405803;
 		delta_PiPi = 0.763535; lambda_Pipi = 0.650383;
@@ -74,7 +84,6 @@ int main(int argc, char *argv[])
 
 		Lambda_0 = 0.0; Lambda_1 = 0.0; Lambda_2 = 0.0; Lambda_3 = 0.0;
 		bool eigenSuccess = get_sorted_eigenvalues_of_pi_mu_nu(
-							/*pi00, pi01, pi02, pi11, pi12, pi22, pi33,*/
 							Lambda_0, Lambda_1, Lambda_2, Lambda_3 );
 
 		const double enthalpy_plus_Pi = e+p+Pi;
@@ -128,7 +137,6 @@ int main(int argc, char *argv[])
 	
 				Lambda_0 = 0.0; Lambda_1 = 0.0; Lambda_2 = 0.0; Lambda_3 = 0.0;
 				bool eigenSuccess = get_sorted_eigenvalues_of_pi_mu_nu(
-									/*pi00, pi01, pi02, pi11, pi12, pi22, pi33,*/
 									Lambda_0, Lambda_1, Lambda_2, Lambda_3 );
 
 				const double enthalpy_plus_Pi = e+p+Pi;
@@ -150,12 +158,6 @@ int main(int argc, char *argv[])
 				check_necessary_conditions(necessary_conditions);
 				check_sufficient_conditions(sufficient_conditions);
 
-				// checksums come out > 0 if any conditions failed
-				/*int nc_checksum = necessary_conditions.size(), sc_checksum = sufficient_conditions.size();
-				for ( const auto & nc : necessary_conditions ) nc_checksum -= static_cast<int>( nc );
-				for ( const auto & sc : sufficient_conditions ) sc_checksum -= static_cast<int>( sc );
-
-				cout << nc_checksum << "   " << sc_checksum << "   " << tau << "   " << x << "   " << y << endl;*/
 				for ( const auto & nc : necessary_conditions ) cout << static_cast<int>( nc );
 				cout << "   ";
 				for ( const auto & sc : sufficient_conditions ) cout << static_cast<int>( sc );
@@ -163,8 +165,6 @@ int main(int argc, char *argv[])
 						<< T << "   " << e << "   "
 						<< static_cast<int>(assumptionsSatisfied) << "   "
 						<< static_cast<int>(eigenSuccess) << endl;
-
-				//if (1) exit(8);
 			}
 		}
 	
@@ -175,8 +175,6 @@ int main(int argc, char *argv[])
 }
 
 bool get_sorted_eigenvalues_of_pi_mu_nu(
-		/*const double pi00, const double pi01, const double pi02, const double pi11,
-		const double pi12, const double pi22, const double pi33,*/
 		double & Lambda_0, double & Lambda_1, double & Lambda_2, double & Lambda_3 )
 {
 	double m[16];
@@ -240,7 +238,7 @@ bool get_sorted_eigenvalues_of_pi_mu_nu(
 	if ( ratio > 0.01 )
 	{
 		cerr /*<< "ERROR: no zero eigenvalues found!  " << endl*/
-			<< "ERROR: " << ratio << " > " << epsilon << ": " /*<< endl*/
+			<< "ERROR: " << ratio << " > " << 0.01 << ": " /*<< endl*/
 			<< tmp0 << "   " << tmp1 << "   " << tmp2 << "   " << tmp3 << "   ";
 		cerr << pi00 << "   " << pi01 << "   " << pi02 << "   "
 			<< pi11 << "   " << pi12 << "   " << pi22 << "   " << pi33 << endl;
@@ -252,7 +250,6 @@ bool get_sorted_eigenvalues_of_pi_mu_nu(
 	gsl_vector_complex_free(eval);
 	gsl_matrix_complex_free(evec);
 
-	//return ( ( success == 0 ) and ( ratio <= epsilon ) );
 	return ( success == 0 );
 }
 
