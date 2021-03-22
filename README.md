@@ -12,7 +12,7 @@ Just type:
 
 ```./check_causality /path/to/file/to/check```
 
-The output files will be stored in the same directory that the file to check is located.
+The output files will be stored in the same directory that the file to check is located.  Note that all quantities in the file must be in units of fm!
 
 ## Generating Animations
 
