@@ -152,6 +152,29 @@ int main(int argc, char *argv[])
 							&& (Lambda_1<=0) && (Lambda_3>=0)
 							&& (Lambda_1<=Lambda_2) && (Lambda_2<=Lambda_3);
 
+				if ( !assumptionsSatisfied )
+					cerr << "Preconditions violated: "
+						 << static_cast<int>(tau_Pi>0)
+						 << static_cast<int>(tau_pi>0)
+						 << static_cast<int>(eta>0)
+						 << static_cast<int>(zeta>0)
+						 << static_cast<int>(tau_pipi>0)
+						 << static_cast<int>(delta_PiPi>0)
+						 << static_cast<int>(lambda_Pipi>0)
+						 << static_cast<int>(delta_pipi>0)
+						 << static_cast<int>(lambda_piPi>0)
+						 << static_cast<int>(cs2>0)
+						 << static_cast<int>(e>0)
+						 << static_cast<int>(p>=0)
+						 << static_cast<int>(enthalpy_plus_Pi>0)	
+						 << static_cast<int>(enthalpy_plus_Pi+Lambda_1>0)
+						 << static_cast<int>(enthalpy_plus_Pi+Lambda_2>0)
+						 << static_cast<int>(enthalpy_plus_Pi+Lambda_3>0)
+						 << static_cast<int>(Lambda_1<=0)
+						 << static_cast<int>(Lambda_3>=0)
+						 << static_cast<int>(Lambda_1<=Lambda_2)
+						 << static_cast<int>(Lambda_2<=Lambda_3) << endl;
+
 				vector<bool> necessary_conditions(6, false);
 				vector<bool> sufficient_conditions(8, false);
 
