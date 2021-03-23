@@ -50,10 +50,10 @@ int main(int argc, char *argv[])
 		cout << "---------------------------------------------------------------"
 			 << endl << "Output per row:" << endl;
 		cout << "[necessary conditions passed (binary)] " << endl
-                "[sufficient conditions passed (binary)] " << endl
-                "tau x y T e [all units in fm] " << endl
-                "[all pre-conditions satisfied (binary)] " << endl
-                "[diagonalization succeeded (binary)] " << endl << endl;
+             << "[sufficient conditions passed (binary)] " << endl
+             << "tau x y T e [all units in fm] " << endl
+             << "[all pre-conditions satisfied (binary)] " << endl
+             << "[diagonalization succeeded (binary)] " << endl << endl;
 		cout << "<<<=========================================================>>>" << endl;
 
 		//exit(1);
