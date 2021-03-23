@@ -257,6 +257,8 @@ bool get_sorted_eigenvalues_of_pi_mu_nu(
 	Lambda_1 = tmp0;
 	Lambda_2 = ( abs(tmp1) > abs(tmp2) ) ? tmp1 : tmp2;
 	Lambda_3 = tmp3;
+cerr << "Preconditions check: " << tmp0 << "   " << tmp1 << "   " << tmp2 << "   " << tmp3
+     << ";   " << Lambda_0 << "   " << Lambda_1 << "   " << Lambda_2 << "   " << Lambda_3 << endl;
 
 	if ( ratio > 0.01 )
 	{
