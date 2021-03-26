@@ -1,6 +1,6 @@
-# =======================================================================================
-#  Makefile for hydrodynamic causality checks     Christopher Plumberg, September 8, 2015
-# =======================================================================================
+# ====================================================================================
+#  Makefile for hydrodynamic causality checks     Christopher Plumberg, March 26, 2021
+# ====================================================================================
 ##
 ##  Environments :	MAIN	= 	main sourcefile	
 ##
@@ -26,14 +26,19 @@ SYSTEMFILES =   $(SRCGNU)
 ifeq "$(MAIN)" ""
 MAIN		=	check_causality
 endif
+ifeq "$(MAIN2)" ""
+MAIN2		=	check_causality_3_plus_1D
+endif
 
 MAINSRC     =   src/check_causality.cpp
+MAIN2SRC    =   src/check_causality_3_plus_1D.cpp
 
 INC		= 	src/necessary_conditions.h src/sufficient_conditions.h
 
 # -------------------------------------------------
 
 TARGET		=	$(MAIN)
+TARGET2		=	$(MAIN2)
 INSTPATH	=	..
 
 # --------------- Pattern rules -------------------
@@ -41,20 +46,25 @@ INSTPATH	=	..
 $(TARGET):
 	$(CC) $(MAINSRC) -o $(TARGET) $(CFLAGS) $(INCFLAGS)  $(LDFLAGS)
 
+$(TARGET2):
+	$(CC) $(MAIN2SRC) -o $(TARGET2) $(CFLAGS) $(INCFLAGS)  $(LDFLAGS)
+
 # -------------------------------------------------
 
-.PHONY:		all distclean distclean install
+.PHONY:		all help distclean install
 
-all:		$(TARGET)
+all:		$(TARGET) $(TARGET2)
 
 help:
 		@grep '^##' GNUmakefile
 
 distclean:	
-		-rm $(TARGET)
+		-rm $(TARGET) $(TARGET2)
 
-install:	$(TARGET)
+install:	$(TARGET) $(TARGET2)
 		cp $(TARGET) $(INSTPATH)
+		cp $(TARGET2) $(INSTPATH)
 
 # --------------- Dependencies -------------------
-src/check_causality.cpp:         src/necessary_conditions.h src/sufficient_conditions.h
+src/check_causality.cpp:            src/necessary_conditions.h src/sufficient_conditions.h
+src/check_causality_3_plus_1D.cpp:  src/necessary_conditions.h src/sufficient_conditions.h
