@@ -195,9 +195,9 @@ int main(int argc, char *argv[])
 						<< static_cast<int>(eigenSuccess);
 				if ( print_characteristic_velocities )
 					cout
-						<< "   " << get_k( Lambda_1 )
-						<< "   " << get_k( Lambda_2 )
-						<< "   " << get_k( Lambda_3 )
+						<< "   " << get_g( Lambda_1 )
+						<< "   " << get_g( Lambda_2 )
+						<< "   " << get_g( Lambda_3 )
 						<< "   " << get_S10( Lambda_1, Lambda_2 )
 						<< "   " << get_S10( Lambda_2, Lambda_1 )
 						<< "   " << get_S10( Lambda_1, Lambda_3 )
