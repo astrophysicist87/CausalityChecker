@@ -33,7 +33,9 @@ endif
 MAINSRC     =   src/check_causality.cpp
 MAIN2SRC    =   src/check_causality_3_plus_1D.cpp
 
-INC		= 	src/necessary_conditions.h src/sufficient_conditions.h
+INC		= 	src/necessary_conditions.h /
+			src/sufficient_conditions.h /
+			src/characteristic_velocities.h
 
 # -------------------------------------------------
 
@@ -67,4 +69,5 @@ install:	$(TARGET) $(TARGET2)
 
 # --------------- Dependencies -------------------
 src/check_causality.cpp:            src/necessary_conditions.h src/sufficient_conditions.h
-src/check_causality_3_plus_1D.cpp:  src/necessary_conditions.h src/sufficient_conditions.h
+src/check_causality_3_plus_1D.cpp:  src/necessary_conditions.h src/sufficient_conditions.h /
+									src/characteristic_velocities.h
