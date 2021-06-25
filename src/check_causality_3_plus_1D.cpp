@@ -22,7 +22,7 @@
 
 using namespace std;
 
-const double epsilon = 1e-6;
+const double epsilon = 1e-4;
 
 bool test_mode;
 
@@ -287,7 +287,7 @@ bool get_sorted_eigenvalues_of_pi_mu_nu(
 			 << Lambda_0 << "   " << Lambda_1 << "   "
 			 << Lambda_2 << "   " << Lambda_3 << endl;
 
-	if ( ratio > epsilon )
+	if ( ratio > 0.01 )
 	{
 		cerr /*<< "ERROR: no zero eigenvalues found!  " << endl*/
 			<< "ERROR: " << ratio << " > " << epsilon << ": " /*<< endl*/
