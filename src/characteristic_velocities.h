@@ -30,7 +30,7 @@ double get_S11(double Lambda_d)
 	double term2num_a = (2.0*eta + lambda_piPi*Pi+(6.0*delta_pipi-tau_pipi)*Lambda_d) / (6.0*tau_pi);
 	double term2num_b = (zeta + delta_PiPi*Pi + lambda_Pipi*Lambda_d)/tau_Pi;
 	double term2num_c = (e+p+Pi+Lambda_d)*cs2;
-	double term2den   = e+p+Pi+Lambda_d
+	double term2den   = e+p+Pi+Lambda_d;
 
 	return ( term1 + (term2num_a + term2num_b + term2num_c) / term2den );
 }
