@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH -t 16:00:00                # Job run time (hh:mm:ss)
+#SBATCH --mem=100G
 #SBATCH -N 1                       # Number of nodes
 #SBATCH -J serial_job              # Name of batch job
 #SBATCH -A qgp
