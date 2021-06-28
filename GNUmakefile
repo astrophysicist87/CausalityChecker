@@ -66,5 +66,5 @@ install:	$(TARGET) $(TARGET2)
 		cp $(TARGET2) $(INSTPATH)
 
 # --------------- Dependencies -------------------
-src/check_causality.cpp:            src/necessary_conditions.h src/sufficient_conditions.h
+src/check_causality.cpp:            src/necessary_conditions.h src/sufficient_conditions.h src/characteristic_velocities.h
 src/check_causality_3_plus_1D.cpp:  src/necessary_conditions.h src/sufficient_conditions.h src/characteristic_velocities.h

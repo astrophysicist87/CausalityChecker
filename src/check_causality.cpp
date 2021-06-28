@@ -18,6 +18,7 @@
 
 #include "necessary_conditions.h"
 #include "sufficient_conditions.h"
+#include "characteristic_velocities.h"
 
 using namespace std;
 
@@ -41,6 +42,8 @@ int main(int argc, char *argv[])
 {
 	// turn off errors for now...
 	gsl_set_error_handler_off();
+
+	constexpr bool print_characteristic_velocities = true;
 
 	// check input first
 	if (argc < 2)
@@ -187,7 +190,22 @@ int main(int argc, char *argv[])
 				cout << "   " << tau << "   " << x << "   " << y << "   "
 						<< T << "   " << e << "   "
 						<< static_cast<int>(assumptionsSatisfied) << "   "
-						<< static_cast<int>(eigenSuccess) << endl;
+						<< static_cast<int>(eigenSuccess);
+				if ( print_characteristic_velocities )
+					cout
+						<< "   " << get_g( Lambda_1 )
+						<< "   " << get_g( Lambda_2 )
+						<< "   " << get_g( Lambda_3 )
+						<< "   " << get_S10( Lambda_1, Lambda_2 )
+						<< "   " << get_S10( Lambda_2, Lambda_1 )
+						<< "   " << get_S10( Lambda_1, Lambda_3 )
+						<< "   " << get_S10( Lambda_3, Lambda_1 )
+						<< "   " << get_S10( Lambda_2, Lambda_3 )
+						<< "   " << get_S10( Lambda_3, Lambda_2 )
+						<< "   " << get_S11( Lambda_1 )
+						<< "   " << get_S11( Lambda_2 )
+						<< "   " << get_S11( Lambda_3 );
+				cout << endl;
 			}
 		}
 	
