@@ -66,9 +66,7 @@ def generate_frame(frameNumber):
         frameData = np.unique(frameData, axis=0)
         print('shape(1) =', frameData.shape)
         if energyCutOff:
-            frameData = frameData[np.where((frameData[:,6] >= eDec) \
-                                           & (frameData[:,7] == 1)\
-                                           & (frameData[:,8] == 1))]
+            frameData = frameData[np.where((frameData[:,6] >= eDec))]
         print('shape(2) =', frameData.shape)
             
     if frameData.size == 0:
