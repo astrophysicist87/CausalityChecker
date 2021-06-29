@@ -64,6 +64,7 @@ def generate_frame(frameNumber):
     if frameData.size != 0:
         tau = frameData[0,2]
         frameData = np.unique(frameData, axis=0)
+        print('shape(1) =', frameData.shape)
         if energyCutOff:
             frameData = frameData[np.where((frameData[:,6] >= eDec) \
                                            & (frameData[:,7] == 1)\
@@ -92,6 +93,7 @@ def generate_frame(frameNumber):
     
     print('nxbins =', nxbins)
     print('nybins =', nybins)
+    print('shape =', frameData.shape)
     print('shape =', np.max(frameData[:,9:], axis=1).shape)
     ax.pcolormesh(np.max(frameData[:,9:], axis=1).reshape((nxbins,nybins)),
                         cmap=cm.get_cmap('viridis'), rasterized=True, vmin=1.0, vmax=2.0)
