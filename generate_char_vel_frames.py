@@ -98,9 +98,9 @@ def generate_frame(frameNumber):
     print('nybins =', nybins)
     print('shape =', frameData.shape)
     print('shape =', np.max(frameData[:,9:], axis=1).shape)
-    ax.pcolormesh(np.array(list(map(colorFunction_acausal,frameData))).reshape((nxbins-1,nybins-1)),
-                        cmap=cm.get_cmap('viridis'), rasterized=True, vmin=1.0, vmax=2.0)
-
+    psm = ax.pcolormesh(np.array(list(map(colorFunction_acausal,frameData))).reshape((nxbins-1,nybins-1)),
+                        cmap=cm.get_cmap('viridis'), vmin=0.0, vmax=10.0)
+    fig.colorbar(psm, ax=ax)
                   
     plt.text(0.075, 0.925, r'$\tau = %(t)5.2f$ fm$/c$'%{'t': tau}, \
             {'color': 'white', 'fontsize': 12}, transform=ax.transAxes,
