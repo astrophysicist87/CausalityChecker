@@ -92,8 +92,8 @@ def generate_frame(frameNumber):
     
     print('nxbins =', nxbins)
     print('nybins =', nybins)
-    print('shape =', np.max(dataToPlot[:,9:], axis=1).shape)
-    ax.pcolormesh(np.max(dataToPlot[:,9:], axis=1).reshape((nxbins,nybins)),
+    print('shape =', np.max(frameData[:,9:], axis=1).shape)
+    ax.pcolormesh(np.max(frameData[:,9:], axis=1).reshape((nxbins,nybins)),
                         cmap=cm.get_cmap('viridis'), rasterized=True, vmin=1.0, vmax=2.0)
 
                   
