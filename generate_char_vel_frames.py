@@ -69,6 +69,7 @@ def generate_frame(frameNumber):
             frameData = frameData[np.where((frameData[:,6] >= eDec) \
                                            & (frameData[:,7] == 1)\
                                            & (frameData[:,8] == 1))]
+        print('shape(2) =', frameData.shape)
             
     if frameData.size == 0:
         frameData = np.zeros((2,21), dtype=int)
