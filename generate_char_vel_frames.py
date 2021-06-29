@@ -43,10 +43,12 @@ colorsToUseParabolic = ['black','red','purple','blue','green','orange']
 #===============================================================================
 def colorFunction_acausal(entry):
     x = np.max(entry[9:])
-    if x >= 1.0:   # else if sufficient conditions are satisfied
+    if entry[6] < eDec or entry[7] != 1 or entry[8] != 1:
+        return -0.5
+    elif x >= 1.0:
         return x
-    else:                      # else if necessary conditions are violated
-        return 0
+    else:
+        return 0.5
 
 #===============================================================================
 def colorFunction_parabolic(entry):
@@ -65,8 +67,10 @@ def generate_frame(frameNumber):
         tau = frameData[0,2]
         frameData = np.unique(frameData, axis=0)
         print('shape(1) =', frameData.shape)
-        if energyCutOff:
-            frameData = frameData[np.where((frameData[:,6] >= eDec))]
+        #if energyCutOff:
+        #    frameData = frameData[np.where((frameData[:,6] >= eDec) \
+        #                                   & (frameData[:,7] == 1)\
+        #                                   & (frameData[:,8] == 1))]
         print('shape(2) =', frameData.shape)
             
     if frameData.size == 0:
@@ -94,7 +98,7 @@ def generate_frame(frameNumber):
     print('nybins =', nybins)
     print('shape =', frameData.shape)
     print('shape =', np.max(frameData[:,9:], axis=1).shape)
-    ax.pcolormesh(np.max(frameData[:,9:], axis=1).reshape((nxbins,nybins)),
+    ax.pcolormesh(np.array(list(map(colorFunction_acausal,frameData))).reshape((nxbins-1,nybins-1)),
                         cmap=cm.get_cmap('viridis'), rasterized=True, vmin=1.0, vmax=2.0)
 
                   
