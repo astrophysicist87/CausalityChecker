@@ -94,12 +94,21 @@ def generate_frame(frameNumber):
                   cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
     '''
     
+    vmin, vmax = 0, 2.0
+    viridis = cm.get_cmap('viridis', 256)
+    newcolors = viridis(np.linspace(0, 1, 256))
+    dataNodes = np.linspace(vmin, vmax, 256)
+    pink = np.array([248/256, 24/256, 148/256, 1])
+    newcolors[np.where(dataNodes <= 1), :] = pink
+    newcmp = ListedColormap(newcolors)
+    
+    
     print('nxbins =', nxbins)
     print('nybins =', nybins)
     print('shape =', frameData.shape)
     print('shape =', np.max(frameData[:,9:], axis=1).shape)
-    psm = ax.pcolormesh(np.array(list(map(colorFunction_acausal,frameData))).reshape((nxbins-1,nybins-1)),
-                        cmap=cm.get_cmap('viridis'), vmin=0.0, vmax=10.0)
+    dataToPlot = np.array(list(map(colorFunction_acausal,frameData))).reshape((nxbins-1,nybins-1))
+    psm = ax.pcolormesh(dataToPlot, cmap=cm.get_cmap('viridis'), vmin=vmin, vmax=vmax)
     fig.colorbar(psm, ax=ax)
                   
     plt.text(0.075, 0.925, r'$\tau = %(t)5.2f$ fm$/c$'%{'t': tau}, \
