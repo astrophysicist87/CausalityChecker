@@ -33,8 +33,6 @@ scalex = scale
 scaley = scale
 nxbins = int(np.round(1.0+2.0*scalex/dx))
 nybins = int(np.round(1.0+2.0*scaley/dx))
-xpts   = np.linspace(-scalex, scalex, nxbins-1)
-ypts   = np.linspace(-scaley, scaley, nybins-1)
 
 energyCutOff = True
 eDec = float(sys.argv[6])/hbarc  # impose cut off in fm^{-4}
@@ -126,7 +124,12 @@ def generate_frame(frameNumber):
     #psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(causalDataToPlot), cmap=causal_cmap, vmin=vmin, vmax=vmax, shading='auto')
     #dataToPlot = np.array(list(map(colorFunction_acausal2, frameData))).reshape((nxbins-1,nybins-1))
     #psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(dataToPlot), cmap=acausal_cmap, vmin=acausal_vmin, vmax=acausal_vmax, shading='auto')
-    dataToPlot = np.array(list(map(colorFunction_acausal, frameData))).reshape((nxbins-1,nybins-1))
+    dataToPlot = np.array(list(map(colorFunction_acausal, frameData)))
+    squareLength = int(np.round(np.sqrt(len(dataToPlot))))
+    # this step accommodates different grid definitions in VISHNU vs. MUSIC
+    xpts   = np.linspace(-scalex, scalex, squareLength, endpoint=bool(squareLength%2==1))
+    ypts   = np.linspace(-scaley, scaley, squareLength, endpoint=bool(squareLength%2==1))
+    dataToPlot = dataToPlot.reshape((squareLength, squareLength))
     psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(dataToPlot), cmap=acausal_cmap, vmin=vmin, vmax=vmax, shading='auto')
     #fig.colorbar(psm, ax=axs[0])
                   
@@ -137,7 +140,12 @@ def generate_frame(frameNumber):
     axs[0].set_xlabel(r'$x$ (fm)', fontsize=16)
     axs[0].set_ylabel(r'$y$ (fm)', fontsize=16)
     
-    dataToPlot = np.array(list(map(colorFunction_parabolic, frameData))).reshape((nxbins-1,nybins-1))
+    dataToPlot = np.array(list(map(colorFunction_parabolic, frameData)))
+    squareLength = int(np.round(np.sqrt(len(dataToPlot))))
+    # this step accommodates different grid definitions in VISHNU vs. MUSIC
+    xpts   = np.linspace(-scalex, scalex, squareLength, endpoint=bool(squareLength%2==1))
+    ypts   = np.linspace(-scaley, scaley, squareLength, endpoint=bool(squareLength%2==1))
+    dataToPlot = dataToPlot.reshape((squareLength, squareLength))
     psm = axs[1].pcolormesh(xpts, ypts, dataToPlot, cmap=parabolic_cmap, vmin=-1.0, vmax=1.0, shading='auto')
     #fig.colorbar(psm, ax=axs[1])
                   
