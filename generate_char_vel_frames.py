@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
@@ -51,7 +51,7 @@ def colorFunction_acausal(entry):
 def colorFunction_acausal2(entry):
     x = np.max(entry[9:])
     if entry[6] < eDec or entry[7] != 1 or entry[8] != 1 or x < 1.0:
-        return 0.0
+        return 1.0
     else:
         return x
 
@@ -109,8 +109,6 @@ def generate_frame(frameNumber):
     acausal_cmap = LinearSegmentedColormap.from_list('acausal_cmap',\
              [(0.0, black), (1e-6, blue), ((1.0-vmin)/(vmax-vmin), blue),
               ((1.00001-vmin)/(vmax-vmin), yellow), (1.0, red)])
-    acausal_vmin, acausal_vmax = 1.0, 1.25
-    #acausal_cmap = LinearSegmentedColormap.from_list('acausal_cmap', [(0.0, transparent), (9.99e-7, transparent), (1e-6, yellow), (1.0, red)])
     causal_cmap = LinearSegmentedColormap.from_list('causal_cmap', [(0.0, black), (1.0, blue)])
     parabolic_cmap = LinearSegmentedColormap.from_list('parabolic_cmap', \
                      [(0.0, orange), (0.49999, orange), (0.5, blue), (0.99999, blue), (1.0, black)])
@@ -120,18 +118,49 @@ def generate_frame(frameNumber):
     print('nybins =', nybins)
     print('shape =', frameData.shape)
     print('shape =', np.max(frameData[:,9:], axis=1).shape)
-    #causalDataToPlot = np.array(list(map(colorFunction_causal, frameData))).reshape((nxbins-1,nybins-1))
-    #psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(causalDataToPlot), cmap=causal_cmap, vmin=vmin, vmax=vmax, shading='auto')
-    #dataToPlot = np.array(list(map(colorFunction_acausal2, frameData))).reshape((nxbins-1,nybins-1))
-    #psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(dataToPlot), cmap=acausal_cmap, vmin=acausal_vmin, vmax=acausal_vmax, shading='auto')
+    
+    
+    
+    # comment this block out if not worrying about colorbar
+    '''
+    acausal_vmin, acausal_vmax = 1.0, 1.25
+    acausal_cmap = LinearSegmentedColormap.from_list('acausal_cmap', \
+                   [(0.0, transparent), (9.99e-7, transparent), (1e-6, yellow), (1.0, red)])
+    causalDataToPlot = np.array(list(map(colorFunction_causal, frameData)))
+    squareLength = int(np.round(np.sqrt(len(causalDataToPlot))))
+    # this step accommodates different grid definitions in VISHNU vs. MUSIC
+    xpts   = np.linspace(-scalex, scalex, squareLength, endpoint=bool(squareLength%2==1))
+    ypts   = np.linspace(-scaley, scaley, squareLength, endpoint=bool(squareLength%2==1))
+    causalDataToPlot = causalDataToPlot.reshape((squareLength, squareLength))
+    #psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(causalDataToPlot), cmap=causal_cmap,
+    #                        vmin=vmin, vmax=vmax, shading='auto')
+    dataToPlot = np.array(list(map(colorFunction_acausal2, frameData)))
+    squareLength = int(np.round(np.sqrt(len(dataToPlot))))
+    dataToPlot = dataToPlot.reshape((squareLength, squareLength))
+    psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(dataToPlot), cmap=acausal_cmap,
+                            vmin=acausal_vmin, vmax=acausal_vmax, shading='auto')
+    '''
+    
+    # the real plotting starts here
     dataToPlot = np.array(list(map(colorFunction_acausal, frameData)))
     squareLength = int(np.round(np.sqrt(len(dataToPlot))))
     # this step accommodates different grid definitions in VISHNU vs. MUSIC
     xpts   = np.linspace(-scalex, scalex, squareLength, endpoint=bool(squareLength%2==1))
     ypts   = np.linspace(-scaley, scaley, squareLength, endpoint=bool(squareLength%2==1))
     dataToPlot = dataToPlot.reshape((squareLength, squareLength))
+    # use this dummy block to plot desired colormap range, then plot on top of it to get actual figure
+    # BEGIN DUMMY STATEMENTS HERE
+    acausal_vmin, acausal_vmax = 1.0, 1.25
+    acausal_cmap = LinearSegmentedColormap.from_list('acausal_cmap', [(0.0, yellow), (1.0, red)])
+    psm = axs[0].pcolormesh(xpts, ypts, 0.0*dataToPlot+0.5*(acausal_vmin+acausal_vmax), cmap=acausal_cmap,
+                            vmin=acausal_vmin, vmax=acausal_vmax, shading='auto')
+    fig.colorbar(psm, ax=axs[0])
+    # END DUMMY STATEMENTS HERE
+    # redefine acausal_cmap
+    acausal_cmap = LinearSegmentedColormap.from_list('acausal_cmap',\
+             [(0.0, black), (1e-6, blue), ((1.0-vmin)/(vmax-vmin), blue),
+              ((1.00001-vmin)/(vmax-vmin), yellow), (1.0, red)])
     psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(dataToPlot), cmap=acausal_cmap, vmin=vmin, vmax=vmax, shading='auto')
-    #fig.colorbar(psm, ax=axs[0])
                   
     plt.text(0.075, 0.925, r'$\tau = %(t)5.2f$ fm$/c$'%{'t': tau}, \
             {'color': 'white', 'fontsize': 12}, transform=axs[0].transAxes,
@@ -164,11 +193,11 @@ def generate_frame(frameNumber):
     axs[1].set_xlabel(r'$x$ (fm)', fontsize=16)
     axs[1].set_ylabel(r'$y$ (fm)', fontsize=16)
     
-    #plt.show()
-    outfilename = outpath + '/slide_w_char_vel%(frame)04d.png' % {'frame': frameNumber}
-    print('Saving to', outfilename)
-    fig.savefig(outfilename, bbox_inches='tight')
-    plt.close(fig)
+    plt.show()
+    #outfilename = outpath + '/slide_w_char_vel%(frame)04d.png' % {'frame': frameNumber}
+    #print('Saving to', outfilename)
+    #fig.savefig(outfilename, bbox_inches='tight')
+    #plt.close(fig)
     #
     #greenFraction = len(vals[np.where(vals==4)])/len(vals)
     #blueFraction = len(vals[np.where(vals==3)])/len(vals)
