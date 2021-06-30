@@ -1,0 +1,148 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5413,        140]
+NotebookOptionsPosition[      4712,        120]
+NotebookOutlinePosition[      5147,        137]
+CellTagsIndexPosition[      5104,        134]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Remove", "[", "\"\<Global`*\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8339784771299872`*^9, 3.8339785095101795`*^9}},
+ CellLabel->"In[51]:=",ExpressionUUID->"99d72d84-da81-4f35-a3fe-3da86812aea7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{
+    "\"\<C:\\\\Users\\\\Christopher Plumberg\\\\Desktop\\\\Research\\\\UIUC\\\
+\\CausalityChecker\\\\frame0000.dat\>\"", ",", "Real"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"ArrayReshape", "[", 
+    RowBox[{"data", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "data", "]"}], "/", "21"}], ",", "21"}], 
+      "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"maxk", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Max", "[", 
+      RowBox[{"#", "[", 
+       RowBox[{"[", 
+        RowBox[{"10", ";;"}], "]"}], "]"}], "]"}], "&"}], "/@", "data"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8339769574624567`*^9, 3.8339770212092557`*^9}, {
+  3.8339771323572345`*^9, 3.8339771374446893`*^9}, {3.8339782053457937`*^9, 
+  3.833978227115536*^9}, {3.833978271149785*^9, 3.8339782907879925`*^9}, {
+  3.833978473107691*^9, 3.8339784735093937`*^9}, {3.8339793145071144`*^9, 
+  3.83397931650344*^9}, {3.8339797138365607`*^9, 3.833979715986559*^9}},
+ CellLabel->"In[53]:=",ExpressionUUID->"e7eaa431-7410-403d-b5d9-5fdd4deee87f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<out.png\>\""}], ",", 
+   RowBox[{"ListDensityPlot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"Flatten", "/@", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{";;", ",", 
+               RowBox[{"{", 
+                RowBox[{"4", ",", "5"}], "}"}]}], "]"}], "]"}], ",", 
+            SqrtBox["maxk"]}], "}"}], "//", "Transpose"}], ")"}]}], ")"}], 
+      "[", 
+      RowBox[{"[", 
+       RowBox[{";;", ";;", "10"}], "]"}], "]"}], ",", 
+     RowBox[{"ColorFunction", "\[Rule]", "\"\<TemperatureMap\>\""}], ",", 
+     RowBox[{"ColorFunctionScaling", "\[Rule]", "True"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2"}], "}"}]}], ",", 
+     RowBox[{"PlotLegends", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"ClippingStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Black", ",", "None"}], "}"}]}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8339772124179697`*^9, 3.8339772145799437`*^9}, {
+   3.833977460562575*^9, 3.8339774706260595`*^9}, 3.833977735474262*^9, {
+   3.8339777766223116`*^9, 3.8339778576167173`*^9}, {3.833977917753295*^9, 
+   3.8339779247406063`*^9}, {3.833977981363514*^9, 3.833977988810011*^9}, {
+   3.833978021905452*^9, 3.833978023723831*^9}, 3.833978176729319*^9, {
+   3.8339787255484705`*^9, 3.833978745240314*^9}, {3.833979452267909*^9, 
+   3.8339794584040585`*^9}, {3.833979498266327*^9, 3.833979543600814*^9}, {
+   3.833979697795781*^9, 3.833979707127904*^9}, {3.8339797828680754`*^9, 
+   3.833979783322431*^9}, {3.8339798914785123`*^9, 3.83397989379166*^9}, 
+   3.8339799305601997`*^9, 3.833979974807934*^9},
+ CellLabel->"In[60]:=",ExpressionUUID->"4371ed5c-5285-4d33-a1e4-f85b752797f0"],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\Christopher \
+Plumberg\\\\Desktop\\\\Research\\\\UIUC\\\\CausalityChecker\\\\out.png\"\>"], \
+"Output",
+ CellChangeTimes->{
+  3.8339775937968116`*^9, {3.8339778300561256`*^9, 3.833977860571494*^9}, {
+   3.833978006588629*^9, 3.8339780289368176`*^9}, 3.8339783446892705`*^9, 
+   3.8339785281785297`*^9, 3.8339793385511117`*^9, 3.8339795946389666`*^9, {
+   3.8339797320980787`*^9, 3.8339797544300213`*^9}, 3.833979792436088*^9, 
+   3.8339799019614325`*^9, 3.8339799410063105`*^9, 3.8339799820848413`*^9},
+ CellLabel->"Out[60]=",ExpressionUUID->"556d91ef-f732-4ce6-beb8-9e9768296c17"]
+}, Open  ]]
+},
+WindowSize->{1053.6, 524.4},
+WindowMargins->{{22.8, Automatic}, {18, Automatic}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"7432af6b-8ab7-4b52-9cfd-b8df24a21520"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 341, 7, 71, "Input",ExpressionUUID->"99d72d84-da81-4f35-a3fe-3da86812aea7"],
+Cell[902, 29, 1218, 31, 185, "Input",ExpressionUUID->"e7eaa431-7410-403d-b5d9-5fdd4deee87f"],
+Cell[CellGroupData[{
+Cell[2145, 64, 1934, 42, 176, "Input",ExpressionUUID->"4371ed5c-5285-4d33-a1e4-f85b752797f0"],
+Cell[4082, 108, 614, 9, 49, "Output",ExpressionUUID->"556d91ef-f732-4ce6-beb8-9e9768296c17"]
+}, Open  ]]
+}
+]
+*)
+

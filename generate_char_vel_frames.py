@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
+from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 #from scipy import interpolate
 import os, sys
@@ -33,6 +33,8 @@ scalex = scale
 scaley = scale
 nxbins = int(np.round(1.0+2.0*scalex/dx))
 nybins = int(np.round(1.0+2.0*scaley/dx))
+xpts   = np.linspace(-scalex, scalex, nxbins-1)
+ypts   = np.linspace(-scaley, scaley, nybins-1)
 
 energyCutOff = True
 eDec = float(sys.argv[6])/hbarc  # impose cut off in fm^{-4}
@@ -42,30 +44,47 @@ colorsToUseParabolic = ['black','red','purple','blue','green','orange']
 
 #===============================================================================
 def colorFunction_acausal(entry):
-    x = np.max(entry[9:])
     if entry[6] < eDec or entry[7] != 1 or entry[8] != 1:
-        return -0.5
-    elif x >= 1.0:
-        return x
+        return 0.0
     else:
-        return 0.5
+        return np.max(entry[9:])
+
+#===============================================================================
+def colorFunction_acausal2(entry):
+    x = np.max(entry[9:])
+    if entry[6] < eDec or entry[7] != 1 or entry[8] != 1 or x < 1.0:
+        return 0.0
+    else:
+        return x
+
+#===============================================================================
+def colorFunction_causal(entry):
+    x = np.max(entry[9:])
+    if entry[6] < eDec or entry[7] != 1 or entry[8] != 1 or x >= 1.0:
+        return 0.0
+    else:
+        return 0.999999
 
 #===============================================================================
 def colorFunction_parabolic(entry):
-    x = np.min(entry[9:])
-    if x < 0.0:           # if basic hydro assumptions failed
-        return x
-    else:                      # else if necessary conditions are violated
-        return 1
+    #x = np.min(entry[9:])
+#    if x < 0.0:           # if basic hydro assumptions failed
+#        return x
+#    else:                      # else if necessary conditions are violated
+#        return 1
+    if entry[6] < eDec or entry[7] != 1 or entry[8] != 1:
+        return 1.0
+    else:
+        return np.min(entry[9:])
 
 #===============================================================================
 def generate_frame(frameNumber):
     # load data to plot
     global tau
-    frameData = np.loadtxt(inpath + '/frame%(frame)04d.dat' % {'frame': frameNumber})
+    frameData = np.loadtxt(inpath + '/frame_w_char_vel%(frame)04d.dat' % {'frame': frameNumber})
     if frameData.size != 0:
         tau = frameData[0,2]
-        frameData = np.unique(frameData, axis=0)
+        #frameData = np.unique(frameData, axis=0)
         print('shape(1) =', frameData.shape)
         #if energyCutOff:
         #    frameData = frameData[np.where((frameData[:,6] >= eDec) \
@@ -78,58 +97,77 @@ def generate_frame(frameNumber):
         
     dataToPlot = frameData[:,[3,4]]     # swap x and y to get correct orientation
 
-    fig, ax = plt.subplots( nrows=1, ncols=1 )
+    fig, axs = plt.subplots( nrows=1, ncols=2, figsize=(15,6) )
     
-    '''
-    # histogram with each entry weighted by causality conditions
-    vals = np.array([colorFunction(entry) for entry in frameData])
-    H, xedges, yedges = np.histogram2d(dataToPlot[:,0], dataToPlot[:,1], \
-                        bins=(nxbins, nybins), weights=vals, \
-                        range=[[-scalex-0.5*dx,scalex+0.5*dx],
-                               [-scaley-0.5*dy,scaley+0.5*dy]])
-        
-    H = H.T
-    ax.imshow(H.astype(int), interpolation='nearest', origin='low', \
-                  extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
-                  cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
-    '''
-    
-    vmin, vmax = 0, 2.0
-    viridis = cm.get_cmap('viridis', 256)
-    newcolors = viridis(np.linspace(0, 1, 256))
-    dataNodes = np.linspace(vmin, vmax, 256)
-    pink = np.array([248/256, 24/256, 148/256, 1])
-    newcolors[np.where(dataNodes <= 1), :] = pink
-    newcmp = ListedColormap(newcolors)
+    vmin, vmax = 0.0, 1.25
+    black = np.array([0/256, 0/256, 0/256, 1])
+    blue = np.array([0/256, 0/256, 256/256, 1])
+    red = np.array([256/256, 0/256, 0/256, 1])
+    green = np.array([0/256, 128/256, 0/256, 1])
+    orange = np.array([255/256, 165/256, 0])
+    purple = np.array([154/256, 18/256, 179/256, 1])
+    yellow = np.array([233/256, 212/256, 96/256, 1])
+    transparent = np.array([0/256, 0/256, 0/256, 0])
+    acausal_cmap = LinearSegmentedColormap.from_list('acausal_cmap',\
+             [(0.0, black), (1e-6, blue), ((1.0-vmin)/(vmax-vmin), blue),
+              ((1.00001-vmin)/(vmax-vmin), yellow), (1.0, red)])
+    acausal_vmin, acausal_vmax = 1.0, 1.25
+    #acausal_cmap = LinearSegmentedColormap.from_list('acausal_cmap', [(0.0, transparent), (9.99e-7, transparent), (1e-6, yellow), (1.0, red)])
+    causal_cmap = LinearSegmentedColormap.from_list('causal_cmap', [(0.0, black), (1.0, blue)])
+    parabolic_cmap = LinearSegmentedColormap.from_list('parabolic_cmap', \
+                     [(0.0, orange), (0.49999, orange), (0.5, blue), (0.99999, blue), (1.0, black)])
     
     
     print('nxbins =', nxbins)
     print('nybins =', nybins)
     print('shape =', frameData.shape)
     print('shape =', np.max(frameData[:,9:], axis=1).shape)
-    dataToPlot = np.array(list(map(colorFunction_acausal,frameData))).reshape((nxbins-1,nybins-1))
-    psm = ax.pcolormesh(dataToPlot, cmap=cm.get_cmap('viridis'), vmin=vmin, vmax=vmax)
-    fig.colorbar(psm, ax=ax)
+    #causalDataToPlot = np.array(list(map(colorFunction_causal, frameData))).reshape((nxbins-1,nybins-1))
+    #psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(causalDataToPlot), cmap=causal_cmap, vmin=vmin, vmax=vmax, shading='auto')
+    #dataToPlot = np.array(list(map(colorFunction_acausal2, frameData))).reshape((nxbins-1,nybins-1))
+    #psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(dataToPlot), cmap=acausal_cmap, vmin=acausal_vmin, vmax=acausal_vmax, shading='auto')
+    dataToPlot = np.array(list(map(colorFunction_acausal, frameData))).reshape((nxbins-1,nybins-1))
+    psm = axs[0].pcolormesh(xpts, ypts, np.sqrt(dataToPlot), cmap=acausal_cmap, vmin=vmin, vmax=vmax, shading='auto')
+    #fig.colorbar(psm, ax=axs[0])
                   
     plt.text(0.075, 0.925, r'$\tau = %(t)5.2f$ fm$/c$'%{'t': tau}, \
-            {'color': 'white', 'fontsize': 12}, transform=ax.transAxes,
+            {'color': 'white', 'fontsize': 12}, transform=axs[0].transAxes,
             horizontalalignment='left', verticalalignment='top')
             
-    ax.set_xlabel(r'$x$ (fm)', fontsize=16)
-    ax.set_ylabel(r'$y$ (fm)', fontsize=16)
+    axs[0].set_xlabel(r'$x$ (fm)', fontsize=16)
+    axs[0].set_ylabel(r'$y$ (fm)', fontsize=16)
+    
+    dataToPlot = np.array(list(map(colorFunction_parabolic, frameData))).reshape((nxbins-1,nybins-1))
+    psm = axs[1].pcolormesh(xpts, ypts, dataToPlot, cmap=parabolic_cmap, vmin=-1.0, vmax=1.0, shading='auto')
+    #fig.colorbar(psm, ax=axs[1])
+                  
+    plt.text(0.075, 0.925, r'$\tau = %(t)5.2f$ fm$/c$'%{'t': tau}, \
+            {'color': 'white', 'fontsize': 12}, transform=axs[0].transAxes,
+            horizontalalignment='left', verticalalignment='top')
+            
+    plt.text(0.5, 0.1, r'Sub-luminality', \
+            {'color': 'white', 'fontsize': 12}, transform=axs[0].transAxes,
+            horizontalalignment='center', verticalalignment='top')
+            
+    plt.text(0.5, 0.1, r'Hyperbolicity', \
+            {'color': 'white', 'fontsize': 12}, transform=axs[1].transAxes,
+            horizontalalignment='center', verticalalignment='top')
+            
+    axs[1].set_xlabel(r'$x$ (fm)', fontsize=16)
+    axs[1].set_ylabel(r'$y$ (fm)', fontsize=16)
     
     #plt.show()
-    outfilename = outpath + '/slide%(frame)04d.png' % {'frame': frameNumber}
+    outfilename = outpath + '/slide_w_char_vel%(frame)04d.png' % {'frame': frameNumber}
     print('Saving to', outfilename)
     fig.savefig(outfilename, bbox_inches='tight')
     plt.close(fig)
-    
-    greenFraction = len(vals[np.where(vals==4)])/len(vals)
-    blueFraction = len(vals[np.where(vals==3)])/len(vals)
-    redFraction = len(vals[np.where(vals==1)])/len(vals)
-    
-    return np.array([tau, greenFraction, blueFraction, redFraction])
-
+    #
+    #greenFraction = len(vals[np.where(vals==4)])/len(vals)
+    #blueFraction = len(vals[np.where(vals==3)])/len(vals)
+    #redFraction = len(vals[np.where(vals==1)])/len(vals)
+    #
+    #return np.array([tau, greenFraction, blueFraction, redFraction])
+    return None
 
 
 #===============================================================================
@@ -144,12 +182,11 @@ if __name__ == "__main__":
             fractionTimeDependence = fractions
         else:
             fractionTimeDependence = np.c_[ fractionTimeDependence, fractions ]
-        generate_frame_wRegulation(frameNumber)
 
-    fractionTimeDependence = fractionTimeDependence.T
+    #fractionTimeDependence = fractionTimeDependence.T
     
     # export to file in case plotting fails
-    np.savetxt( outpath + '/cell_fractions_tau_dependence.dat', fractionTimeDependence )
+    #np.savetxt( outpath + '/cell_fractions_tau_dependence.dat', fractionTimeDependence )
     
-    generate_fraction_time_dependence( fractionTimeDependence )
+    #generate_fraction_time_dependence( fractionTimeDependence )
 
