@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
@@ -193,11 +193,11 @@ def generate_frame(frameNumber):
     axs[1].set_xlabel(r'$x$ (fm)', fontsize=16)
     axs[1].set_ylabel(r'$y$ (fm)', fontsize=16)
     
-    plt.show()
-    #outfilename = outpath + '/slide_w_char_vel%(frame)04d.png' % {'frame': frameNumber}
-    #print('Saving to', outfilename)
-    #fig.savefig(outfilename, bbox_inches='tight')
-    #plt.close(fig)
+    #plt.show()
+    outfilename = outpath + '/slide_w_char_vel%(frame)04d.png' % {'frame': frameNumber}
+    print('Saving to', outfilename)
+    fig.savefig(outfilename, bbox_inches='tight')
+    plt.close(fig)
     #
     #greenFraction = len(vals[np.where(vals==4)])/len(vals)
     #blueFraction = len(vals[np.where(vals==3)])/len(vals)
