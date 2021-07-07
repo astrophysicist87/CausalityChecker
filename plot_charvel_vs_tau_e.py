@@ -42,7 +42,7 @@ if __name__ == "__main__":
     
     print(dataToPlot.shape)
     print(len(dataToPlot))
-    newLen=len(dataToPlot)
+    newLen=dataToPlot.size
     print(newLen)
     print(newLen/3)
     toSave = dataToPlot.reshape([newLen/3,3])
