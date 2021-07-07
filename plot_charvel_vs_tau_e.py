@@ -22,7 +22,7 @@ def load_file(filename):
     data = np.c_[ data[:,0], 0.197327*data[:,1],
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
-    hist0, bins0 = np.histogram(data[:,1], bins=ebins)
+    hist0, bins0 = np.histogram(data[:,1], bins=ebins, weights=np.ones(data[:,1].size))
     hist, bins = np.histogram(data[:,1], bins=ebins, weights=np.heaviside(np.sqrt(data[:,3])-1.0,0.0))
     #print(bins.size)
     #print(hist.size)
