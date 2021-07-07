@@ -6,8 +6,8 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 import os, sys
 
-nebins = 250  # fix this somehow
-ebins = np.arange(0,2*nebins,2)
+nebins = 100  # fix this somehow
+ebins = np.arange(0,5*nebins,5)
 
 #====================================================================================
 def get_ncols(filename):
