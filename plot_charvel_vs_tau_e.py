@@ -26,7 +26,8 @@ def load_file(filename):
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
     hist0, bins0 = np.histogram(data[:,1], bins=ebins, weights=np.ones(data[:,1].size))
-    hist, bins = np.histogram(data[:,1], bins=ebins, weights=np.heaviside(np.sqrt(data[:,3])-1.0,0.0))
+    w = np.sqrt(data[:,3])-1.0
+    hist, bins = np.histogram(data[:,1], bins=ebins, weights=w*np.heaviside(w,0.0))
     tmp = np.c_[ data[:,0], data[:,1], data[:,3], np.heaviside(np.sqrt(data[:,3])-1.0,0.0) ]
     print(tmp[np.where(tmp[:,1]>400.0)])
     #print(bins.size)
@@ -37,7 +38,7 @@ def load_file(filename):
 if __name__ == "__main__":
     #for filename in sys.argv[1:]:
     #    print(load_file(filename).shape)
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:3]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:11]])
     print(dataToPlot.shape)
     print(dataToPlot.size)
     #dataToPlot = dataToPlot.reshape( len(dataToPlot)/(3*ebins.size), ebins.size, 3 )
