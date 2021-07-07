@@ -31,7 +31,7 @@ def load_file(filename):
 if __name__ == "__main__":
     #for filename in sys.argv[1:]:
     #    print(load_file(filename).shape)
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:10]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:]])
     print(dataToPlot.shape)
     print(dataToPlot.size)
     #dataToPlot = dataToPlot.reshape( len(dataToPlot)/(3*ebins.size), ebins.size, 3 )
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2])
     fig.colorbar(psm, ax=ax)
     
-    np.savetxt('./charvel_density.dat', dataToPlot.reshape(dataToPlot.size/3,3))
+    #np.savetxt('./charvel_density.dat', dataToPlot.reshape(dataToPlot.size/3,3))
     
     #plt.show()
     outfilename = './charvel_density_plot.png'
