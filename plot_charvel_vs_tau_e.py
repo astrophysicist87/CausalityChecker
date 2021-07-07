@@ -36,7 +36,10 @@ if __name__ == "__main__":
     print(dataToPlot.size)
     #dataToPlot = dataToPlot.reshape( len(dataToPlot)/(3*ebins.size), ebins.size, 3 )
     fig, ax = plt.subplots( nrows=1, ncols=1 )
-    ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2])
+    psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2])
+    fig.colorbar(psm, ax=ax)
+    
+    np.savetxt('./charvel_density.dat', dataToPlot)
     
     #plt.show()
     outfilename = './charvel_density_plot.png'
