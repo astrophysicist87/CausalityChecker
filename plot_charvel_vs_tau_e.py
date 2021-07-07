@@ -6,8 +6,8 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 import os, sys
 
-nebins = 100  # fix this somehow
-ebins = np.arange(0,5*nebins,5)
+nebins = 500  # fix this somehow
+ebins = np.arange(0,1*nebins,1)
 
 #====================================================================================
 def get_ncols(filename):
@@ -23,7 +23,7 @@ def load_file(filename):
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
     hist0, bins0 = np.histogram(data[:,1], bins=nebins)
-    hist, bins = np.histogram(data[:,1], bins=nebins, weights=data[:,3])
+    hist, bins = np.histogram(data[:,1], bins=nebins, weights=np.heaviside(np.sqrt(data[:,3])-1.0),0.0)
     #print(bins.size)
     #print(hist.size)
     return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100) ]
