@@ -29,6 +29,8 @@ def load_file(filename):
     
 #====================================================================================
 if __name__ == "__main__":
+    for filename in sys.argv[1:]:
+        print(load_file(filename).shape)
     dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:]])
     print(dataToPlot.shape)
     print(dataToPlot.size)
