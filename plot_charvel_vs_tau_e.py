@@ -22,10 +22,11 @@ def load_file(filename):
     data = np.c_[ data[:,0], 0.197327*data[:,1],
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
+    hist0, bins0 = np.histogram(data[:,1], bins=nebins)
     hist, bins = np.histogram(data[:,1], bins=nebins, weights=data[:,3])
     #print(bins.size)
     #print(hist.size)
-    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist ]
+    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/hist0 ]
     
 #====================================================================================
 if __name__ == "__main__":
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     
     print(dataToPlot)
     toSave = dataToPlot.reshape([7200,3])
-    np.savetxt('./charvel_density.dat', toSave)
+    np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
     
     #plt.show()
     outfilename = './charvel_density_plot.png'
