@@ -19,13 +19,16 @@ def get_ncols(filename):
 #====================================================================================
 def load_file(filename):
     data = np.loadtxt( filename, usecols=tuple([2,6]+list(range(9, get_ncols(filename)))) )
+    print(data.shape)
+    print(data[:,2:].shape)
+    print(np.amax(data[:,2:], axis=1).shape)
     data = np.c_[ data[:,0], 0.197327*data[:,1],
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
     hist0, bins0 = np.histogram(data[:,1], bins=ebins, weights=np.ones(data[:,1].size))
     hist, bins = np.histogram(data[:,1], bins=ebins, weights=np.heaviside(np.sqrt(data[:,3])-1.0,0.0))
     tmp = np.c_[ data[:,0], data[:,1], data[:,3], np.heaviside(np.sqrt(data[:,3])-1.0,0.0) ]
-    print(tmp[np.where(tmp[:,1]>250.0)])
+    print(tmp[np.where(tmp[:,1]>400.0)])
     #print(bins.size)
     #print(hist.size)
     return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ]
