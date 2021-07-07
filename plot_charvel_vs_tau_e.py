@@ -33,7 +33,7 @@ def load_file(filename):
     #print(tmp[np.where(tmp[:,1]>400.0)])
     #print(bins.size)
     #print(hist.size)
-    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100) ]
+    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-10) ]
     
 #====================================================================================
 if __name__ == "__main__":
