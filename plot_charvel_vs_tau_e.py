@@ -25,7 +25,7 @@ def load_file(filename):
     hist0, bins0 = np.histogram(data[:,1], bins=ebins, weights=np.ones(data[:,1].size))
     hist, bins = np.histogram(data[:,1], bins=ebins, weights=np.heaviside(np.sqrt(data[:,3])-1.0,0.0))
     tmp = np.c_[ data[:,0], data[:,1], data[:,3], np.heaviside(np.sqrt(data[:,3])-1.0,0.0) ]
-    print(tmp[np.where(tmp[:,1]>500.0)])
+    print(tmp[np.where(tmp[:,1]>250.0)])
     #print(bins.size)
     #print(hist.size)
     return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ]
