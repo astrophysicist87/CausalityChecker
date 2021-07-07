@@ -45,7 +45,7 @@ if __name__ == "__main__":
     newLen=dataToPlot.size
     print(newLen)
     print(newLen/3)
-    toSave = dataToPlot.reshape([newLen/3,3])
+    toSave = dataToPlot.reshape([int(newLen/3),3])
     np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
     
     #plt.show()
