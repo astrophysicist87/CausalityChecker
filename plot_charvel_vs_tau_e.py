@@ -6,8 +6,8 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 import os, sys
 
-nebins = 10  # fix this somehow
-ebins = np.arange(0,1*nebins,1)
+nebins = 1000  # fix this somehow
+ebins = np.arange(0,10.0,0.01)
 
 #====================================================================================
 def get_ncols(filename):
@@ -19,9 +19,9 @@ def get_ncols(filename):
 #====================================================================================
 def load_file(filename):
     data = np.loadtxt( filename, usecols=tuple([2,6]+list(range(9, get_ncols(filename)))) )
-    print(data.shape)
-    print(data[:,2:].shape)
-    print(np.amax(data[:,2:], axis=1).shape)
+    #print(data.shape)
+    #print(data[:,2:].shape)
+    #print(np.amax(data[:,2:], axis=1).shape)
     data = np.c_[ data[:,0], 0.197327*data[:,1],
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
@@ -37,8 +37,8 @@ def load_file(filename):
 #====================================================================================
 if __name__ == "__main__":
     dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:11]])
-    print(dataToPlot.shape)
-    print(dataToPlot.size)
+    #print(dataToPlot.shape)
+    #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], shading='nearest')
     fig.colorbar(psm, ax=ax)
