@@ -25,12 +25,12 @@ def load_file(filename):
     hist, bins = np.histogram(data[:,1], bins=nebins, weights=data[:,3])
     #print(bins.size)
     #print(hist.size)
-    yield np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist ]
+    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist ]
     
 #====================================================================================
 if __name__ == "__main__":
-    #for filename in sys.argv[1:]:
-    #    print(load_file(filename).shape)
+    for filename in sys.argv[1:]:
+        print(load_file(filename).shape)
     dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:]])
     print(dataToPlot.shape)
     print(dataToPlot.size)
