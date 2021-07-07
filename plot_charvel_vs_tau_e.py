@@ -6,7 +6,7 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 import os, sys
 
-nebins = 10  # fix this somehow
+nebins = 500  # fix this somehow
 ebins = np.arange(0,1*nebins,1)
 
 #====================================================================================
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     print(dataToPlot.size)
     #dataToPlot = dataToPlot.reshape( len(dataToPlot)/(3*ebins.size), ebins.size, 3 )
     fig, ax = plt.subplots( nrows=1, ncols=1 )
-    psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], shading='gourad')
+    psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], shading='nearest')
     fig.colorbar(psm, ax=ax)
     
     print(dataToPlot.shape)
