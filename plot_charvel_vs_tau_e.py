@@ -39,7 +39,7 @@ if __name__ == "__main__":
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2])
     fig.colorbar(psm, ax=ax)
     
-    np.savetxt('./charvel_density.dat', dataToPlot)
+    np.savetxt('./charvel_density.dat', dataToPlot.reshape(len(dataToPlot)/3,3))
     
     #plt.show()
     outfilename = './charvel_density_plot.png'
