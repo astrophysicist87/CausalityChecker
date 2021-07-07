@@ -6,7 +6,7 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 import os, sys
 
-nebins = 500  # fix this somehow
+nebins = 10  # fix this somehow
 ebins = np.arange(0,1*nebins,1)
 
 #====================================================================================
