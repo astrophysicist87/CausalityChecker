@@ -23,6 +23,8 @@ def load_file(filename):
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
     hist, bins = np.histogram(data[:,1], bins=nebins, weights=data[:,3])
+    print(bins.size)
+    print(hist.size)
     result = np.c_[ data[0,0]*np.ones(hist.size), bins, hist ]
     print(result.shape)
     return result
