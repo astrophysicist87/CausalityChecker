@@ -18,7 +18,7 @@ def get_ncols(filename):
 
 #====================================================================================
 def load_file(filename):
-    data = np.loadtxt( filename, usecols=tuple([2,6]+list(range(9, n_cols))) )
+    data = np.loadtxt( filename, usecols=tuple([2,6]+list(range(9, get_ncols(filename)))) )
     data = np.c_[ data[:,0], 0.197327*data[:,1],
                   np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
     # max violation histogram
