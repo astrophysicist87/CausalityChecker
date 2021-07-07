@@ -26,13 +26,13 @@ def load_file(filename):
     hist, bins = np.histogram(data[:,1], bins=ebins, weights=np.heaviside(np.sqrt(data[:,3])-1.0,0.0))
     #print(bins.size)
     #print(hist.size)
-    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/hist0 ]
+    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ]
     
 #====================================================================================
 if __name__ == "__main__":
     #for filename in sys.argv[1:]:
     #    print(load_file(filename).shape)
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:10]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:2]])
     print(dataToPlot.shape)
     print(dataToPlot.size)
     #dataToPlot = dataToPlot.reshape( len(dataToPlot)/(3*ebins.size), ebins.size, 3 )
@@ -44,8 +44,8 @@ if __name__ == "__main__":
     print(len(dataToPlot))
     newLen=dataToPlot.size
     print(newLen)
-    print(newLen/3)
-    toSave = dataToPlot.reshape([int(newLen/3),3])
+    print(newLen/5)
+    toSave = dataToPlot.reshape([int(newLen/5),5])
     np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
     
     #plt.show()
