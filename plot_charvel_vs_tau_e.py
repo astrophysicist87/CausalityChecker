@@ -26,7 +26,7 @@ def load_file(filename):
     hist, bins = np.histogram(data[:,1], bins=nebins, weights=data[:,3])
     #print(bins.size)
     #print(hist.size)
-    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/hist0 ]
+    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100) ]
     
 #====================================================================================
 if __name__ == "__main__":
