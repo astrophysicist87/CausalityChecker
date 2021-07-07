@@ -41,7 +41,8 @@ if __name__ == "__main__":
     fig.colorbar(psm, ax=ax)
     
     print(dataToPlot)
-    toSave = dataToPlot.reshape([len(dataToPlot)/3,3])
+    newLen=int(len(dataToPlot)/3)
+    toSave = dataToPlot.reshape([newLen,3])
     np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
     
     #plt.show()
