@@ -19,6 +19,7 @@ def get_ncols(filename):
 #====================================================================================
 def load_file(filename):
     data = np.loadtxt( filename, usecols=tuple([2,6]+list(range(9, get_ncols(filename)))) )
+    print('Processing tau =', data[0,0])
     #print(data.shape)
     #print(data[:,2:].shape)
     #print(np.amax(data[:,2:], axis=1).shape)
@@ -36,7 +37,7 @@ def load_file(filename):
     
 #====================================================================================
 if __name__ == "__main__":
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:11]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:251]])
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
