@@ -31,7 +31,7 @@ if __name__ == "__main__":
     #print(dataToPlot.shape)
     #dataToPlot = dataToPlot.reshape( len(dataToPlot)/(3*ebins.size), ebins.size, 3 )
     fig, ax = plt.subplots( nrows=1, ncols=1 )
-    ax.pcolormesh(data[:,:,0], data[:,:,1], data[:,:,2])
+    ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2])
     
     #plt.show()
     outfilename = './charvel_density_plot.png'
