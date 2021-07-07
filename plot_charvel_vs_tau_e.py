@@ -29,6 +29,7 @@ def load_file(filename):
 if __name__ == "__main__":
     dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:]])
     print(dataToPlot.shape)
+    print(dataToPlot.size)
     #dataToPlot = dataToPlot.reshape( len(dataToPlot)/(3*ebins.size), ebins.size, 3 )
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2])
