@@ -46,7 +46,7 @@ if __name__ == "__main__":
     x = dataToPlot[:,:,0]
     y = dataToPlot[:,:,1]
     extent = np.min(x), np.max(x), np.min(y), np.max(y)
-    psm = plt.imshow(dataToPlot[:,:,2], interpolation='bicubic', extent=extent)
+    psm = plt.imshow(dataToPlot[:,:,2].T, interpolation='bicubic', extent=extent)
     fig.colorbar(psm, ax=ax)
     
     #print(dataToPlot.shape)
