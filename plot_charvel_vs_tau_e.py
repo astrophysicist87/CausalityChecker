@@ -42,12 +42,12 @@ if __name__ == "__main__":
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
-    #psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], shading='nearest')
-    x = dataToPlot[:,:,0]
-    y = dataToPlot[:,:,1]
-    extent = np.min(x), np.max(x), np.min(y), np.max(y)
-    m = dataToPlot[:,:,2]
-    psm = plt.imshow(m.T, interpolation='bilinear', extent=extent)
+    psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], shading='nearest')
+    #x = dataToPlot[:,:,0]
+    #y = dataToPlot[:,:,1]
+    #extent = np.min(x), np.max(x), np.min(y), np.max(y)
+    #m = dataToPlot[:,:,2]
+    #psm = plt.imshow(m.T, interpolation='bilinear', extent=extent)
     fig.colorbar(psm, ax=ax)
     
     #print(dataToPlot.shape)
