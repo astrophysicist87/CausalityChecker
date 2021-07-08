@@ -38,7 +38,7 @@ def load_file(filename):
     
 #====================================================================================
 if __name__ == "__main__":
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:31]])
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
