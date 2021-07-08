@@ -33,11 +33,11 @@ def load_file(filename):
     #print(tmp[np.where(tmp[:,1]>400.0)])
     #print(bins.size)
     #print(hist.size)
-    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-10) ]
+    return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ]
     
 #====================================================================================
 if __name__ == "__main__":
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[71:81]])
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     newLen=dataToPlot.size
     #print(newLen)
     #print(newLen/3)
-    toSave = dataToPlot.reshape([int(newLen/3),3])
+    toSave = dataToPlot.reshape([int(newLen/5),5])
     np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
     
     #plt.show()
