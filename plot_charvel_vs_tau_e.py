@@ -9,6 +9,8 @@ import os, sys
 nebins = 200  # fix this somehow
 ebins = np.arange(0,2.0,0.01)
 
+dirname = os.path.dirname(sys.argv[1])
+
 #====================================================================================
 def get_ncols(filename):
     with open(filename) as f:
@@ -48,7 +50,9 @@ if __name__ == "__main__":
     #extent = np.min(x), np.max(x), np.min(y), np.max(y)
     #m = dataToPlot[:,:,2]
     #psm = plt.imshow(m.T, interpolation='bilinear', extent=extent)
-    fig.colorbar(psm, ax=ax)
+    cbar = fig.colorbar(psm, ax=ax)
+    cbar.set_label(r'$\left< c_{\mathrm{group}}-1 \right>$')
+
     
     #print(dataToPlot.shape)
     #print(len(dataToPlot))
@@ -56,13 +60,13 @@ if __name__ == "__main__":
     #print(newLen)
     #print(newLen/3)
     toSave = dataToPlot.reshape([int(newLen/5),5])
-    np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
+    np.savetxt(dirname + '/../charvel_density.dat', toSave, fmt='%12.8f')
     
     ax.set_xlabel(r'$x$ (fm)', fontsize=16)
     ax.set_ylabel(r'$e$ (GeV/fm$^3$)', fontsize=16)
     
     #plt.show()
-    outfilename = './charvel_density_plot.png'
+    outfilename = dirname + '/../charvel_density_plot.png'
     print('Saving to', outfilename)
     fig.savefig(outfilename, bbox_inches='tight')
     plt.close(fig)
