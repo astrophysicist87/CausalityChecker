@@ -24,21 +24,21 @@ def load_file(filename):
     #print(data[:,2:].shape)
     #print(np.amax(data[:,2:], axis=1).shape)
     data = np.c_[ data[:,0], 0.197327*data[:,1],
-                  np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1) ]
+                  np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1),
+                  data[:,7], data[:,8]]
+    data = data[np.where( (data[:,4]==1) & (data[:,5]==1) )]
     data[:,3] = np.array(list(map(lambda x : np.max([x,0.0]), data[:,3])))
     # max violation histogram
     hist0, bins0 = np.histogram(data[:,1], bins=ebins, weights=np.ones(data[:,1].size))
     w = np.sqrt(data[:,3])-1.0
     hist, bins = np.histogram(data[:,1], bins=ebins, weights=w*np.heaviside(w,0.0))
-    #tmp = np.c_[ data[:,0], data[:,1], data[:,3], np.heaviside(np.sqrt(data[:,3])-1.0,0.0) ]
-    #print(tmp[np.where(tmp[:,1]>400.0)])
     #print(bins.size)
     #print(hist.size)
     return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ]
     
 #====================================================================================
 if __name__ == "__main__":
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:31]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     newLen=dataToPlot.size
     #print(newLen)
     #print(newLen/3)
-    toSave = dataToPlot.reshape([int(newLen/5),5])
+    toSave = dataToPlot.reshape([int(newLen/6),6])
     np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
     
     #plt.show()
