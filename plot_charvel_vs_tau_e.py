@@ -6,8 +6,8 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 import os, sys
 
-nebins = 1000  # fix this somehow
-ebins = np.arange(0,10.0,0.01)
+nebins = 200  # fix this somehow
+ebins = np.arange(0,2.0,0.01)
 
 #====================================================================================
 def get_ncols(filename):
@@ -38,7 +38,7 @@ def load_file(filename):
     
 #====================================================================================
 if __name__ == "__main__":
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[71:81]])
+    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
