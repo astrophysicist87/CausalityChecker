@@ -18,14 +18,14 @@ def get_ncols(filename):
 
 #====================================================================================
 def load_file(filename):
-    data = np.loadtxt( filename, usecols=tuple([2,6]+list(range(9, get_ncols(filename)))) )
+    data = np.loadtxt( filename, usecols=tuple([2,6,7,8]+list(range(9, get_ncols(filename)))) )
     print('Processing tau =', data[0,0])
     #print(data.shape)
     #print(data[:,2:].shape)
     #print(np.amax(data[:,2:], axis=1).shape)
     data = np.c_[ data[:,0], 0.197327*data[:,1],
-                  np.amin(data[:,2:], axis=1), np.amax(data[:,2:], axis=1),
-                  data[:,7], data[:,8]]
+                  np.amin(data[:,4:], axis=1), np.amax(data[:,4:], axis=1),
+                  data[:,2], data[:,3] ]
     data = data[np.where( (data[:,4]==1) & (data[:,5]==1) )]
     data[:,3] = np.array(list(map(lambda x : np.max([x,0.0]), data[:,3])))
     # max violation histogram
