@@ -58,6 +58,9 @@ if __name__ == "__main__":
     toSave = dataToPlot.reshape([int(newLen/5),5])
     np.savetxt('./charvel_density.dat', toSave, fmt='%12.8f')
     
+    ax.set_xlabel(r'$x$ (fm)', fontsize=16)
+    ax.set_ylabel(r'$e$ (GeV/fm$^3$)', fontsize=16)
+    
     #plt.show()
     outfilename = './charvel_density_plot.png'
     print('Saving to', outfilename)
