@@ -44,7 +44,8 @@ if __name__ == "__main__":
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
-    psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], shading='nearest')
+    psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], \
+                        shading='nearest', vmin = 0.0, vmax = 0.15)
     #x = dataToPlot[:,:,0]
     #y = dataToPlot[:,:,1]
     #extent = np.min(x), np.max(x), np.min(y), np.max(y)
