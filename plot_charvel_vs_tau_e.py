@@ -8,7 +8,7 @@ import os, sys
 
 tau0 = 0.0    # initialize tau0
 tau = 0.0     # ditto for tau
-maxDeltatau = 0.75 # maximum duration to plot
+maxDeltatau = 0.05 # maximum duration to plot
 nebins = 200  # fix this somehow
 nTbins = 80
 ebins = np.arange(0,2.0,0.01)
@@ -45,8 +45,9 @@ def load_file(filename, i):
     hist0, bins0 = np.histogram(data[:,1], bins=Tbins, weights=np.ones(data[:,1].size))
     w = np.sqrt(data[:,4])-1.0
     hist, bins = np.histogram(data[:,1], bins=Tbins, weights=w*np.heaviside(w,0.0))
-    #print(bins.size)
-    #print(hist.size)
+    print(bins.size)
+    print(hist.size)
+    print(np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ].size)
     return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ]
     
 #====================================================================================
