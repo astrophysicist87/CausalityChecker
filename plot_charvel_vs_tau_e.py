@@ -27,7 +27,7 @@ def get_ncols(filename):
 def load_file(filename, i):
     global tau0, tau
     if tau - tau0 > maxDeltatau:
-        return np.array([])
+        return np.array([[]])
     data = np.loadtxt( filename, usecols=tuple([2,5,6,7,8]+list(range(9, get_ncols(filename)))) )
     tau = data[0,0]
     if i==0:
@@ -45,9 +45,9 @@ def load_file(filename, i):
     hist0, bins0 = np.histogram(data[:,1], bins=Tbins, weights=np.ones(data[:,1].size))
     w = np.sqrt(data[:,4])-1.0
     hist, bins = np.histogram(data[:,1], bins=Tbins, weights=w*np.heaviside(w,0.0))
-    print(bins.size)
-    print(hist.size)
-    print(np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ].shape)
+    #print(bins.size)
+    #print(hist.size)
+    #print(np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ].shape)
     return np.c_[ data[0,0]*np.ones(hist.size), 0.5*(bins[:-1]+bins[1:]), hist/(hist0+1e-100), hist, hist0 ]
     
 #====================================================================================
