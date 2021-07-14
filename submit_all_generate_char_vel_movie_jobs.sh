@@ -15,22 +15,22 @@
 
 
 # p Pb - Vishnu
-for file in ../OSU_hydro/RESULTS_pPb_OPTIMAL/causality_check_w_characteristic_velocities.dat
+for file in ../OSU_hydro/RESULTS_pPb_OPTIMAL_nc6/causality_check_w_characteristic_velocities.dat
 do
-	sbatch --export=ALL,causality_check_file=`readlink -e $file`,gridScale=7.182,gridSize=$[113**2],eDecoupling=0.26511743083794326,dxy=0.12825 generate_char_vel_movie.sbatch
+	sbatch --export=ALL,causality_check_file=`readlink -e $file`,gridScale=6.7725,gridSize=$[211**2],eDecoupling=0.26511743083794326,dxy=0.0645 generate_char_vel_movie.sbatch
 done
 
 
 # p Pb - MUSIC
-for file in ../MUSIC/v8/pPb_noKompost/results/causality_check_w_characteristic_velocities.dat
-do
-	sbatch --export=ALL,causality_check_file=`readlink -e $file`,gridScale=10.0,gridSize=$[512**2],eDecoupling=0.18,dxy=0.0390625 generate_char_vel_movie.sbatch
-done
+#for file in ../MUSIC/v8/pPb_noKompost/results/causality_check_w_characteristic_velocities.dat
+#do
+#	sbatch --export=ALL,causality_check_file=`readlink -e $file`,gridScale=10.0,gridSize=$[512**2],eDecoupling=0.18,dxy=0.0390625 generate_char_vel_movie.sbatch
+#done
 
 
 # O O - MUSIC
-for file in ../MUSIC/v8/OO_noKompost/results/causality_check_w_characteristic_velocities.dat
-do
-	sbatch --export=ALL,causality_check_file=`readlink -e $file`,gridScale=14.0,gridSize=$[512**2],eDecoupling=0.18,dxy=0.0546875 generate_char_vel_movie.sbatch
-done
+#for file in ../MUSIC/v8/OO_noKompost/results/causality_check_w_characteristic_velocities.dat
+#do
+#	sbatch --export=ALL,causality_check_file=`readlink -e $file`,gridScale=14.0,gridSize=$[512**2],eDecoupling=0.18,dxy=0.0546875 generate_char_vel_movie.sbatch
+#done
 
