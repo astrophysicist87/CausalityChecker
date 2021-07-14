@@ -244,7 +244,7 @@ if __name__ == "__main__":
             fractionTimeDependence = fractions
         else:
             fractionTimeDependence = np.c_[ fractionTimeDependence, fractions ]
-        generate_frame_wRegulation(frameNumber)
+        #generate_frame_wRegulation(frameNumber)
 
     fractionTimeDependence = fractionTimeDependence.T
     
