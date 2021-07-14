@@ -27,7 +27,7 @@ def get_ncols(filename):
 def load_file(filename, i):
     global tau0, tau
     if tau - tau0 > maxDeltatau:
-        return np.array([[]])
+        return (np.zeros((nTbins-1,5))-1000.0)
     data = np.loadtxt( filename, usecols=tuple([2,5,6,7,8]+list(range(9, get_ncols(filename)))) )
     tau = data[0,0]
     if i==0:
@@ -53,13 +53,16 @@ def load_file(filename, i):
 #====================================================================================
 if __name__ == "__main__":
     #dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
-    dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[1:])], dtype=object)
-    #print(dataToPlot)
+    dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[1:])])
+    print(dataToPlot.shape)
+    print(dataToPlot.size)
+    print(len(dataToPlot))
     #print(np.array(list(map(len,dataToPlot))))
     #print(np.where(np.array(list(map(len,dataToPlot)))>1))
     #print(np.array(np.where(np.array(list(map(len,dataToPlot)))>1)[0]))
     #print(np.where(np.asarray(list(map(len,dataToPlot)))>1).flatten())
-    dataToPlot = dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)[0]].astype(float)
+    #dataToPlot = dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)[0]]
+    dataToPlot = dataToPlot[np.where(dataToPlot[:,0]>0)]
     #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
