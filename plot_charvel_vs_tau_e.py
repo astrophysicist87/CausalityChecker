@@ -36,7 +36,7 @@ def load_file(filename, i):
     #print(data.shape)
     #print(data[:,2:].shape)
     #print(np.amax(data[:,2:], axis=1).shape)
-    data = np.c_[ data[:,0], 0.197327*data[:,1], 0.197327*data[:,2],
+    data = np.c_[ data[:,0], 197.327*data[:,1], 0.197327*data[:,2],
                   np.amin(data[:,5:], axis=1), np.amax(data[:,5:], axis=1),
                   data[:,3], data[:,4] ]
     data = data[np.where( (data[:,5]==1) & (data[:,6]==1) )] # where causality analysis succeeded
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     #print(np.array(list(map(len,dataToPlot))))
     print(np.where(np.array(list(map(len,dataToPlot)))>1))
     print(dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)])
-    dataToPlot = dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)].astype(float)
+    dataToPlot = np.array(dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)]).astype(float)
     #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
