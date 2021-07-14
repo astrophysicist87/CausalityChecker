@@ -58,7 +58,7 @@ if __name__ == "__main__":
     #print(np.array(list(map(len,dataToPlot))))
     print(np.where(np.array(list(map(len,dataToPlot)))>1))
     print(dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)])
-    dataToPlot = np.array(dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)]).astype(float)
+    dataToPlot = dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)]
     #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
