@@ -63,6 +63,9 @@ if __name__ == "__main__":
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     print(dataToPlot.shape)
+    print("Also check:")
+    for dataThing in dataToPlot:
+        print(dataThing.shape)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], 1.0+dataToPlot[:,:,2], \
                         shading='nearest', vmin = 1.0, vmax = 1.20)
