@@ -6,6 +6,9 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from matplotlib import cm
 import os, sys
 
+tau0 = 0.0    # initialize tau0
+tau = 0.0     # ditto for tau
+maxDeltatau = 0.8 # maximum duration to plot
 nebins = 200  # fix this somehow
 ebins = np.arange(0,2.0,0.01)
 
@@ -19,9 +22,15 @@ def get_ncols(filename):
     return n_cols
 
 #====================================================================================
-def load_file(filename):
+def load_file(filename, i):
+    global tau0, tau
+    if tau - tau0 > maxDeltatau:
+        return np.array([])
     data = np.loadtxt( filename, usecols=tuple([2,6,7,8]+list(range(9, get_ncols(filename)))) )
-    print('Processing tau =', data[0,0])
+    tau = data[0,0]
+    if i==0:
+        tau0 = tau
+    print('Processing tau =', tau)
     #print(data.shape)
     #print(data[:,2:].shape)
     #print(np.amax(data[:,2:], axis=1).shape)
@@ -40,19 +49,21 @@ def load_file(filename):
     
 #====================================================================================
 if __name__ == "__main__":
-    dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
+    #dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
+    dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[1:81])])
+    #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], dataToPlot[:,:,2], \
-                        shading='nearest', vmin = 0.0, vmax = 0.15)
+                        shading='nearest', vmin = 0.0, vmax = 0.20)
     #x = dataToPlot[:,:,0]
     #y = dataToPlot[:,:,1]
     #extent = np.min(x), np.max(x), np.min(y), np.max(y)
     #m = dataToPlot[:,:,2]
     #psm = plt.imshow(m.T, interpolation='bilinear', extent=extent)
     cbar = fig.colorbar(psm, ax=ax)
-    cbar.set_label(r'$\left< c_{\mathrm{group}}-1 \right>$')
+    cbar.set_label(r'$v_{\mathrm{char}}/c$', fontsize=16)
 
     
     #print(dataToPlot.shape)
@@ -63,7 +74,7 @@ if __name__ == "__main__":
     toSave = dataToPlot.reshape([int(newLen/5),5])
     np.savetxt(dirname + '/../charvel_density.dat', toSave, fmt='%12.8f')
     
-    ax.set_xlabel(r'$x$ (fm)', fontsize=16)
+    ax.set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
     ax.set_ylabel(r'$e$ (GeV/fm$^3$)', fontsize=16)
     
     #plt.show()
