@@ -53,13 +53,13 @@ def load_file(filename, i):
 #====================================================================================
 if __name__ == "__main__":
     #dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
-    dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[1:])])
+    dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[1:])], dtype=object)
     #print(dataToPlot)
     #print(np.array(list(map(len,dataToPlot))))
     #print(np.where(np.array(list(map(len,dataToPlot)))>1))
     #print(np.array(np.where(np.array(list(map(len,dataToPlot)))>1)[0]))
     #print(np.where(np.asarray(list(map(len,dataToPlot)))>1).flatten())
-    dataToPlot = dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)[0]]
+    dataToPlot = dataToPlot[np.where(np.array(list(map(len,dataToPlot)))>1)[0]].astype(float)
     #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
