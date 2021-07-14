@@ -8,5 +8,5 @@
 #SBATCH -e serial.e%j              # Name of batch job output file
 
 echo 'Starting...'
-./generate_movie.sh $causality_check_file $gridScale $gridSize $eDecoupling $dxy
+bash generate_movie.sh $causality_check_file $gridScale $gridSize $eDecoupling $dxy
 echo 'Finished!'
