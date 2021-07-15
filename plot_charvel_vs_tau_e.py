@@ -8,7 +8,7 @@ import os, sys
 
 tau0 = 0.0    # initialize tau0
 tau = 0.0     # ditto for tau
-maxDeltatau = 0.75 # maximum duration to plot
+maxDeltatau = 0.05 # maximum duration to plot
 #nebins = 200  # fix this somehow
 #nTbins = 50
 ebins = np.arange(0,2.0,0.01)
