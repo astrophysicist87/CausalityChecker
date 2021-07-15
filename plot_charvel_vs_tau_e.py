@@ -9,10 +9,12 @@ import os, sys
 tau0 = 0.0    # initialize tau0
 tau = 0.0     # ditto for tau
 maxDeltatau = 0.05 # maximum duration to plot
-nebins = 200  # fix this somehow
-nTbins = 80
+#nebins = 200  # fix this somehow
+#nTbins = 50
 ebins = np.arange(0,2.0,0.01)
-Tbins = np.arange(0,400.0,5.0)
+Tbins = np.arange(125.0,225.0,2.0)
+nebins = len(ebins)
+nTbins = len(Tbins)
 
 dirname = os.path.dirname(sys.argv[1])
 
@@ -54,9 +56,9 @@ def load_file(filename, i):
 if __name__ == "__main__":
     #dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
     dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[1:])])
-    print(dataToPlot.shape)
-    print(dataToPlot.size)
-    print(len(dataToPlot))
+    #print(dataToPlot.shape)
+    #print(dataToPlot.size)
+    #print(len(dataToPlot))
     #print(np.array(list(map(len,dataToPlot))))
     #print(np.where(np.array(list(map(len,dataToPlot)))>1))
     #print(np.array(np.where(np.array(list(map(len,dataToPlot)))>1)[0]))
@@ -66,8 +68,8 @@ if __name__ == "__main__":
     dataToPlot = dataToPlot.reshape((dims[0]*dims[1],dims[2]))
     dataToPlot = dataToPlot[np.where(dataToPlot[:,0]>0)]
     dims2 = dataToPlot.shape
-    print("dims =",dims)
-    print("dims2 =",dims2)
+    #print("dims =",dims)
+    #print("dims2 =",dims2)
     dataToPlot = dataToPlot.reshape((dims2[0]//dims[1],dims[1],dims[2]))
     #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
