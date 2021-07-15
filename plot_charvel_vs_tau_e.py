@@ -12,7 +12,7 @@ maxDeltatau = 0.05 # maximum duration to plot
 #nebins = 200  # fix this somehow
 #nTbins = 50
 ebins = np.arange(0,2.0,0.01)
-Tbins = np.arange(125.0,225.0,2.0)
+Tbins = np.arange(125.0,225.0,0.5)
 nebins = len(ebins)
 nTbins = len(Tbins)
 
