@@ -82,7 +82,7 @@ if __name__ == "__main__":
         print(dataThing.shape)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], 1.0+dataToPlot[:,:,2], \
-                        shading='gouraud', vmin = 1.0, vmax = 1.20)
+                        shading='gouraud', vmin = 1.0, vmax = 1.20, cmap=plt.get_cmap('magma'))
     #x = dataToPlot[:,:,0]
     #y = dataToPlot[:,:,1]
     #extent = np.min(x), np.max(x), np.min(y), np.max(y)
