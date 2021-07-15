@@ -101,7 +101,7 @@ if __name__ == "__main__":
     np.savetxt(dirname + '/../charvel_density.dat', toSave, fmt='%12.8f')
     
     ax.set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
-    ax.set_ylabel(r'$e$ (GeV/fm$^3$)', fontsize=16)
+    ax.set_ylabel(r'$T$ (MeV)', fontsize=16)
     
     #plt.show()
     #outfilename = dirname + '/../charvel_density_plot.png'
