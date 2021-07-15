@@ -66,6 +66,8 @@ if __name__ == "__main__":
     dataToPlot = dataToPlot.reshape((dims[0]*dims[1],dims[2]))
     dataToPlot = dataToPlot[np.where(dataToPlot[:,0]>0)]
     dims2 = dataToPlot.shape
+    print("dims =",dims)
+    print("dims2 =",dims2)
     dataToPlot = dataToPlot.reshape((dims2[0]/dims[1],dims[1],dims[2]))
     #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
