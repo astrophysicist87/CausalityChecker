@@ -34,7 +34,7 @@ def load_file(filename, i):
     tau = data[0,0]
     if i==0:
         tau0 = tau
-    print('Processing tau =', tau)
+    print('Processing tau =', tau, flush=True)
     #print(data.shape)
     #print(data[:,2:].shape)
     #print(np.amax(data[:,2:], axis=1).shape)
@@ -74,12 +74,12 @@ if __name__ == "__main__":
     #(lambda x : x[np.where(np.array(list(map(len,x)))!=0)].astype(float))(np.array([f(x) for x in range(10)],dtype=object))
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
-    print(dataToPlot.shape)
-    print(dataToPlot.size)
-    print(len(dataToPlot))
-    print("Also check:")
-    for dataThing in dataToPlot:
-        print(dataThing.shape)
+    #print(dataToPlot.shape)
+    #print(dataToPlot.size)
+    #print(len(dataToPlot))
+    #print("Also check:")
+    #for dataThing in dataToPlot:
+    #    print(dataThing.shape)
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], 1.0+dataToPlot[:,:,2], \
                         shading='gouraud', vmin = 1.0, vmax = 1.20, cmap=plt.get_cmap('magma'))
