@@ -16,7 +16,10 @@ Tbins = np.arange(125.0,225.0,1.0)
 nebins = len(ebins)
 nTbins = len(Tbins)
 
-dirname = os.path.dirname(sys.argv[1])
+TFOs = [151.0, 143.26]
+
+VISHNUorMUSICmode = int(sys.argv[1])  # 0 == VISHNU, 1 == MUSIC
+dirname = os.path.dirname(sys.argv[2])
 
 #====================================================================================
 def get_ncols(filename):
@@ -55,7 +58,7 @@ def load_file(filename, i):
 #====================================================================================
 if __name__ == "__main__":
     #dataToPlot = np.array([load_file(filename) for filename in sys.argv[1:81]])
-    dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[1:])])
+    dataToPlot = np.array([load_file(filename,i) for i, filename in enumerate(sys.argv[2:])])
     #print(dataToPlot.shape)
     #print(dataToPlot.size)
     #print(len(dataToPlot))
@@ -91,6 +94,8 @@ if __name__ == "__main__":
     cbar = fig.colorbar(psm, ax=ax)
     cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
 
+    xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.min(dataToPlot[:,:,1]), 3)
+    ax.plot(xpts, 0.0*xpts+TFOs[VISHNUorMUSICmode], color='white', ls='--')
     
     #print(dataToPlot.shape)
     #print(len(dataToPlot))
