@@ -94,7 +94,7 @@ if __name__ == "__main__":
     cbar = fig.colorbar(psm, ax=ax)
     cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
 
-    xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.min(dataToPlot[:,:,1]), 3)
+    xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.max(dataToPlot[:,:,0]), 3)
     ax.plot(xpts, 0.0*xpts+TFOs[VISHNUorMUSICmode], color='white', ls='--')
     
     #print(dataToPlot.shape)
