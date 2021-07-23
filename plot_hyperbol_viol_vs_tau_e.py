@@ -9,9 +9,8 @@ import os, sys
 tau0 = 0.0    # initialize tau0
 tau = 0.0     # ditto for tau
 maxDeltatau = 0.75 # maximum duration to plot
-ebins = np.arange(0,2.0,0.01)
-Tbins = np.arange(125.0,225.0,1.0)
-nebins = len(ebins)
+#Tbins = np.arange(125.0,225.0,1.0)
+Tbins = np.arange(0.0,225.0,1.0)
 nTbins = len(Tbins)
 
 TFOs = [151.0, 143.26]
@@ -41,9 +40,9 @@ def load_file(filename, i):
                   data[:,3], data[:,4] ]                     # overwrite data here
     data = data[np.where( (data[:,5]==1) & (data[:,6]==1) )] # where causality analysis succeeded
     # zero positive values; keep negative VALUES
-    data[:,3] = np.array(list(map(lambda x : np.min([x,0.0]), data[:,3])))
+    #data[:,3] = np.array(list(map(lambda x : np.min([x,0.0]), data[:,3])))
     # zero positive values; keep negative SIGNS
-    #data[:,3] = np.array(list(map(lambda x : np.sign(np.min([x,0.0])), data[:,3])))
+    data[:,3] = np.array(list(map(lambda x : np.sign(np.min([x,0.0])), data[:,3])))
     # max violation histogram
     hist0, bins0 = np.histogram(data[:,1], bins=Tbins, weights=np.ones(data[:,1].size))
     hist, bins = np.histogram(data[:,1], bins=Tbins, weights=data[:,3])
@@ -60,9 +59,9 @@ if __name__ == "__main__":
 
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], np.abs(dataToPlot[:,:,2]), \
-                        shading='gouraud', cmap=plt.get_cmap('magma'))
+                        shading='gouraud', vmin=0.0, vmin=1.0, cmap=plt.get_cmap('magma'))
     cbar = fig.colorbar(psm, ax=ax)
-    cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
+    cbar.set_label(r'Rate of hyperbolicity violation', size=16)
 
     xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.max(dataToPlot[:,:,0]), 3)
     ax.plot(xpts, 0.0*xpts+TFOs[VISHNUorMUSICmode], color='white', ls='--')
