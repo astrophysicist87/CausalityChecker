@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# do MUSIC results
 cd /projects/jnorhos/plumberg/MUSIC/v8
 for direc in *
 do
@@ -8,9 +9,10 @@ do
 	cp ${direc}/results/hyperbol_viol_density_plot.png \
 	   ${direc}/results/hyperbol_viol_density_plot_${direc}.png 
 done
+
 cd /projects/jnorhos/plumberg/CausalityChecker
 
-
+# do OSU hydro results
 for direc in ../OSU_hydro/RESULTS_pPb_OPTIMAL_nc6 ../OSU_hydro/test_all
 do
 	python3 plot_hyperbol_viol_vs_tau_e.py 0 ${direc}/char_vel_frames/*
