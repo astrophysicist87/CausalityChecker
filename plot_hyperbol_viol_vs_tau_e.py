@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], np.abs(dataToPlot[:,:,2]), \
-                        shading='gouraud', vmin=0.0, vmin=1.0, cmap=plt.get_cmap('magma'))
+                        shading='gouraud', vmin=0.0, vmax=1.0, cmap=plt.get_cmap('magma'))
     cbar = fig.colorbar(psm, ax=ax)
     cbar.set_label(r'Rate of hyperbolicity violation', size=16)
 
