@@ -72,6 +72,8 @@ if __name__ == "__main__":
     
     ax.set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
     ax.set_ylabel(r'$T$ (MeV)', fontsize=16)
+
+    ax.set_ylim(bottom=125.0, top=225.0)
     
     outfilename = dirname + '/../hyperbol_viol_density_plot.png'
     print('Saving to', outfilename)

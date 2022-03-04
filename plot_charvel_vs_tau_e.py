@@ -103,13 +103,13 @@ if __name__ == "__main__":
     #print(newLen)
     #print(newLen/3)
     toSave = dataToPlot.reshape([int(newLen/5),5])
-    np.savetxt(dirname + '/../charvel_density.dat', toSave, fmt='%12.8f')
+    np.savetxt(dirname + '/../charvel_density_check.dat', toSave, fmt='%12.8f')
     
     ax.set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
     ax.set_ylabel(r'$T$ (MeV)', fontsize=16)
     
     #plt.show()
-    outfilename = dirname + '/../charvel_density_plot.png'
+    outfilename = dirname + '/../charvel_density_plot_check.png'
     #outfilename = './charvel_density_plot.png'
     print('Saving to', outfilename)
     fig.savefig(outfilename, bbox_inches='tight')
