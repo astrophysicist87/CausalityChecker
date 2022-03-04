@@ -47,8 +47,8 @@ def load_file(filename, i):
     data = data[np.where( (data[:,5]==1) & (data[:,6]==1) )] # where causality analysis succeeded
     data[:,4] = np.array(list(map(lambda x : np.max([x,0.0]), data[:,4])))
     # max violation histogram
-    hist0, bins0 = np.histogram(data[:,1], bins=Tbins, weights=np.ones(data[:,1].size))
     w = np.sqrt(data[:,4])-1.0
+    hist0, bins0 = np.histogram(data[:,1], bins=Tbins, weights=np.ones(data[:,1].size)*np.heaviside(w,0.0))
     hist, bins = np.histogram(data[:,1], bins=Tbins, weights=w*np.heaviside(w,0.0))
     #print(bins.size)
     #print(hist.size)
