@@ -67,8 +67,8 @@ if __name__ == "__main__":
 
     cbar = fig.colorbar(psm, ax=ax)
     cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
-    cbar.ax.tick_params(labelsize=14)
-    cbar.ax.set_xticks([1.0,1.05,1.1,1.15,1.2])
+    cbar.ax.tick_params(labelsize=24)
+    cbar.set_ticks([1.0,1.05,1.1,1.15,1.2])
 
     xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.max(dataToPlot[:,:,0]), 3)
     ax.plot(xpts, 0.0*xpts+TFOs[VISHNUorMUSICmode], color='white', ls='--')
