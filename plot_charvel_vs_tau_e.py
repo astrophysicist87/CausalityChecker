@@ -83,7 +83,7 @@ if __name__ == "__main__":
     ax.set_ylabel(r'$T$ (MeV)', fontsize=16)
     
     #plt.show()
-    outfilename = dirname + '/../charvel_density_plot_check.png'
+    outfilename = dirname + '/../charvel_density_plot.png'
     #outfilename = './charvel_density_plot.png'
     print('Saving to', outfilename)
     fig.savefig(outfilename, bbox_inches='tight')
