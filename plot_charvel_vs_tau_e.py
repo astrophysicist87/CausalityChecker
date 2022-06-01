@@ -77,7 +77,8 @@ if __name__ == "__main__":
     toSave = dataToPlot.reshape([int(newLen/5),5])
     np.savetxt(dirname + '/../charvel_density_check.dat', toSave, fmt='%12.8f')
 
-    ax.tick_params(axis='both', which='major', labelsize=10)
+    ax.tick_params(axis='both', which='major', labelsize=12)
+    ax.set_xticks(np.arange(tau0,tau,0.1))
     ax.set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
     ax.set_ylabel(r'$T$ (MeV)', fontsize=16)
     
