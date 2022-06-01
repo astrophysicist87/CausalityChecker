@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     cbar = fig.colorbar(psm, ax=ax)
     cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
-    cbar.ax.tick_params(labelsize=24)
+    cbar.ax.tick_params(labelsize=13)
     cbar.set_ticks([1.0,1.05,1.1,1.15,1.2])
 
     xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.max(dataToPlot[:,:,0]), 3)
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     toSave = dataToPlot.reshape([int(newLen/5),5])
     np.savetxt(dirname + '/../charvel_density_check.dat', toSave, fmt='%12.8f')
 
-    ax.tick_params(axis='both', which='major', labelsize=14)
+    ax.tick_params(axis='both', which='major', labelsize=13)
     ax.set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
     ax.set_ylabel(r'$T$ (MeV)', fontsize=16)
     
