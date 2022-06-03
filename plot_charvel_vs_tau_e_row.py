@@ -20,7 +20,7 @@ if __name__ == "__main__":
         exit()
         
     nFiles = (len(sys.argv)-1)//2
-    fig, axs = plt.subplots( nrows=1, ncols=nFiles, figsize=(17.5,5), constrained_layout=True )
+    fig, axs = plt.subplots( nrows=1, ncols=nFiles, figsize=(17.5,5) )
     plt.subplots_adjust( hspace=-0.01, wspace=0.025 )
     
     # loop over all histograms to plot together
