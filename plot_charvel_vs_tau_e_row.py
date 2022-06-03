@@ -25,9 +25,11 @@ if __name__ == "__main__":
     # loop over all histograms to plot together
     for i in range(nFiles):
         dataDimsFile = sys.argv[2*i+1]
+        print('Loading', dataDimsFile)
         dim0, dim1, dim2, tau0, tau, TFO = np.loadtxt(dataDimsFile)
         dataFile = sys.argv[2*(i+1)]
-        dataToPlot = np.loadtxt(dataFile).reshape([dim0,dim1,dim2])
+        print('Loading', dataFile)
+        dataToPlot = np.loadtxt(dataFile).reshape([int(d) for d in (dim0,dim1,dim2)])
 
         psm = axs[i].pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], 1.0+dataToPlot[:,:,2], \
                             shading='gouraud', vmin = 1.0, vmax = 1.20, cmap=plt.get_cmap('magma'))
