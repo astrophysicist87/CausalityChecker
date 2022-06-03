@@ -21,7 +21,7 @@ if __name__ == "__main__":
         
     nFiles = (len(sys.argv)-1)//2
     fig, axs = plt.subplots( nrows=1, ncols=nFiles, figsize=(15,5) )
-    plt.subplots_adjust( hspace=-0.01, wspace=0.1 )
+    plt.subplots_adjust( hspace=-0.01, wspace=0.01 )
     
     # loop over all histograms to plot together
     for i in range(nFiles):
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         axs[i].plot(xpts, 0.0*xpts+TFO, color='white', ls='--')
 
         axs[i].tick_params(axis='both', which='major', labelsize=14)
-        axs[i].set_xticks(np.arange(tau0, tau, 0.05))
+        axs[i].set_xticks(np.arange(tau0, tau, 0.1))
         axs[i].set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
     
     #axs[0].tick_params( axis='y', which='both', left=False, right=False, labelleft=False )
