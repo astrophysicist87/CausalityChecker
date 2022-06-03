@@ -34,9 +34,9 @@ if __name__ == "__main__":
         psm = axs[i].pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], 1.0+dataToPlot[:,:,2], \
                             shading='gouraud', vmin = 1.0, vmax = 1.20, cmap=plt.get_cmap('magma'))
 
-        cbar = fig.colorbar(psm, ax=axs[i])
-        cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
-        cbar.ax.tick_params(labelsize=14)
+        #cbar = fig.colorbar(psm, ax=axs[i])
+        #cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
+        #cbar.ax.tick_params(labelsize=14)
 
         xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.max(dataToPlot[:,:,0]), 3)
         axs[i].plot(xpts, 0.0*xpts+TFO, color='white', ls='--')
@@ -46,11 +46,11 @@ if __name__ == "__main__":
         axs[i].set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
         axs[i].set_ylabel(r'$T$ (MeV)', fontsize=16)
     
-    plt.show()
-    #outfilename = dirname + '/../charvel_density_plot.png'
-    #print('Saving to', outfilename)
-    #fig.savefig(outfilename, bbox_inches='tight')
-    #plt.close(fig)
+    #plt.show()
+    outfilename = "charvel_density_combined.png"
+    print('Saving to', outfilename)
+    fig.savefig(outfilename, bbox_inches='tight')
+    plt.close(fig)
 
     
         
