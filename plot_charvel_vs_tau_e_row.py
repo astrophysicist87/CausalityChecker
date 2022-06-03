@@ -20,27 +20,29 @@ if __name__ == "__main__":
         exit()
         
     nFiles = (len(sys.argv)-1)//2
-    fig, ax = plt.subplots( nrows=1, ncols=nFiles )
+    fig, axs = plt.subplots( nrows=1, ncols=nFiles )
     
     # loop over all histograms to plot together
-    for dataFile in sys.argv[1::2]:
-        dataToPlot = np.loadtxt()
+    for i in range(nFiles):
+        dataDimsFile = sys.argv[2*i+1]
+        dim0, dim1, dim2, tau0, tau, TFO = np.loadtxt(dataDimsFile)
+        dataFile = sys.argv[2*(i+1)]
+        dataToPlot = np.loadtxt(dataFile).reshape([dim0,dim1,dim2])
 
-        psm = ax.pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], 1.0+dataToPlot[:,:,2], \
+        psm = axs[i].pcolormesh(dataToPlot[:,:,0], dataToPlot[:,:,1], 1.0+dataToPlot[:,:,2], \
                             shading='gouraud', vmin = 1.0, vmax = 1.20, cmap=plt.get_cmap('magma'))
 
-        cbar = fig.colorbar(psm, ax=ax)
+        cbar = fig.colorbar(psm, ax=axs[i])
         cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
         cbar.ax.tick_params(labelsize=14)
 
         xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.max(dataToPlot[:,:,0]), 3)
-        ax.plot(xpts, 0.0*xpts+TFOs[VISHNUorMUSICmode], color='white', ls='--')
+        axs[i].plot(xpts, 0.0*xpts+TFO, color='white', ls='--')
 
-
-        ax.tick_params(axis='both', which='major', labelsize=14)
-        ax.set_xticks(np.arange(tau0,tau,0.1))
-        ax.set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
-        ax.set_ylabel(r'$T$ (MeV)', fontsize=16)
+        axs[i].tick_params(axis='both', which='major', labelsize=14)
+        axs[i].set_xticks(np.arange(tau0, tau, 0.1))
+        axs[i].set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
+        axs[i].set_ylabel(r'$T$ (MeV)', fontsize=16)
     
     plt.show()
     #outfilename = dirname + '/../charvel_density_plot.png'
