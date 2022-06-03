@@ -20,8 +20,8 @@ if __name__ == "__main__":
         exit()
         
     nFiles = (len(sys.argv)-1)//2
-    fig, axs = plt.subplots( nrows=1, ncols=nFiles, figsize=(10,5) )
-    plt.subplots_adjust( hspace=-0.01, wspace=-0.01 )
+    fig, axs = plt.subplots( nrows=1, ncols=nFiles, figsize=(12,5) )
+    plt.subplots_adjust( hspace=-0.01, wspace=0.1 )
     
     # loop over all histograms to plot together
     for i in range(nFiles):
@@ -47,7 +47,8 @@ if __name__ == "__main__":
     axs[2].tick_params( axis='y', which='both', left=False, right=False, labelleft=False )
     axs[0].set_ylabel(r'$T$ (MeV)', fontsize=16)
 
-    cbar = fig.colorbar(psm, ax=axs[-1])
+    #cbar = fig.colorbar(psm, ax=axs[-1])
+    cbar = plt.colorbar()
     cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
     cbar.ax.tick_params(labelsize=14)
 
