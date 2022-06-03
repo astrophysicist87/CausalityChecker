@@ -68,14 +68,16 @@ if __name__ == "__main__":
     cbar = fig.colorbar(psm, ax=ax)
     cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
     cbar.ax.tick_params(labelsize=14)
-    #cbar.set_ticks([1.0,1.05,1.1,1.15,1.2])
 
     xpts = np.linspace(np.min(dataToPlot[:,:,0]), np.max(dataToPlot[:,:,0]), 3)
     ax.plot(xpts, 0.0*xpts+TFOs[VISHNUorMUSICmode], color='white', ls='--')
     
     newLen=dataToPlot.size
     toSave = dataToPlot.reshape([int(newLen/5),5])
-    np.savetxt(dirname + '/../charvel_density_check.dat', toSave, fmt='%12.8f')
+    np.savetxt(dirname + '/../charvel_density_toPlot.dat', toSave, fmt='%12.8f')
+    np.savetxt(dirname + '/../charvel_dims.dat', dataToPlot.shape \
+                                                 + (tau0,tau,TFOs[VISHNUorMUSICmode]))
+
 
     ax.tick_params(axis='both', which='major', labelsize=14)
     ax.set_xticks(np.arange(tau0,tau,0.1))
