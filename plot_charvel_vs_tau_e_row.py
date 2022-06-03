@@ -20,7 +20,7 @@ if __name__ == "__main__":
         exit()
         
     nFiles = (len(sys.argv)-1)//2
-    fig, axs = plt.subplots( nrows=1, ncols=nFiles, figsize=(5,10) )
+    fig, axs = plt.subplots( nrows=1, ncols=nFiles, figsize=(10,5) )
     plt.subplots_adjust( hspace=-0.01, wspace=-0.01 )
     
     # loop over all histograms to plot together
@@ -42,6 +42,9 @@ if __name__ == "__main__":
         axs[i].set_xticks(np.arange(tau0, tau, 0.1))
         axs[i].set_xlabel(r'$\tau$ (fm/$c$)', fontsize=16)
     
+    #axs[0].tick_params( axis='y', which='both', left=False, right=False, labelleft=False )
+    axs[1].tick_params( axis='y', which='both', left=False, right=False, labelleft=False )
+    axs[2].tick_params( axis='y', which='both', left=False, right=False, labelleft=False )
     axs[0].set_ylabel(r'$T$ (MeV)', fontsize=16)
 
     cbar = fig.colorbar(psm, ax=axs[-1])
