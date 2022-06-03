@@ -48,7 +48,7 @@ if __name__ == "__main__":
     axs[0].set_ylabel(r'$T$ (MeV)', fontsize=16)
 
     #cbar = fig.colorbar(psm, ax=axs[-1])
-    cbar = plt.colorbar()
+    cbar = plt.colorbar(psm)
     cbar.set_label(r'$v_{\mathrm{char}}/c$', size=16)
     cbar.ax.tick_params(labelsize=14)
 
