@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
   ifstream infile_CC(causality_check_path.c_str());
   ifstream infile_LS(local_speed_path.c_str());
-  
+
   if (infile_CC.is_open() && infile_LS.is_open())
   {
     const int CC_fields_to_skip = 9;
@@ -48,12 +48,12 @@ int main(int argc, char *argv[])
       // read all fields from local speed file
       issLS >> tau >> x >> y >> v;
 
-      cout << "CHECK:";
-      for (auto cv: characteristic_velocities) cout << "  " << cv;
-      cout << "\n\n";
+      // cout << "CHECK:";
+      // for (auto cv: characteristic_velocities) cout << "  " << cv;
+      // cout << "\n\n";
 
-      cout << tau << "  " << x << "  " << y << "  " << v << "  " << max_cv << "\n";
-      std::terminate();
+      cout << tau << "  " << x << "  " << y << "  " << v << "  " << max_cv << "  " << v*max_cv << "\n";
+      // std::terminate();
     }
   }
 
