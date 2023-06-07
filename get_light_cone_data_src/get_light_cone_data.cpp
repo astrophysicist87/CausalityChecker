@@ -22,7 +22,8 @@ int main(int argc, char *argv[])
   string local_speed_path     = argv[2];
 
   ifstream infile_CC(causality_check_path.c_str());
-  ifstream infile_LS(causality_check_path.c_str());
+  ifstream infile_LS(local_speed_path.c_str());
+  
   if (infile_CC.is_open() && infile_LS.is_open())
   {
     const int CC_fields_to_skip = 9;
