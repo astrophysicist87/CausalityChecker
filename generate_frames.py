@@ -41,9 +41,9 @@ colorsToUse = ['black','red','purple','blue','green','orange']
 
 #===============================================================================
 def colorFunction(entry):
-    if entry[-2]==0:           # if basic hydro assumptions failed
+    if entry[7]==0:           # if basic hydro assumptions failed
         return 5
-    elif entry[-1]==0:         # else if diagonalization of pimunu failed
+    elif entry[8]==0:         # else if diagonalization of pimunu failed
         return 4
     elif entry[1]==11111111:   # else if sufficient conditions are satisfied
         return 3
