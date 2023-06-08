@@ -48,7 +48,7 @@ def animate(i):
     im = plt.imshow(H, interpolation = 'nearest', origin = 'low', \
                   extent = [ -scalex-0.5*dx,scalex+0.5*dx,
                              -scaley-0.5*dy,scaley+0.5*dy ], \
-                  cmap = 'bwr', vmin = 0.8, vmax = 1.2)
+                  cmap = 'plasma', vmin = 1.0, vmax = np.amax(values))
 
     #ax = plt.gca()
     #im = ax.imshow(image, cmap=chosen_colormap)
