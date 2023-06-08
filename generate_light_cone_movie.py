@@ -52,9 +52,9 @@ def animate(i):
 
     #ax = plt.gca()
     #im = ax.imshow(image, cmap=chosen_colormap)
-    divider = make_axes_locatable(ax)
-    cax = divider.append_axes("right", size="5%", pad=0.05)
-    plt.colorbar(im, cax=cax)
+    #divider = make_axes_locatable(ax)
+    #cax = divider.append_axes("right", size="5%", pad=0.05)
+    #plt.colorbar(im, cax=cax)
     
     plt.axis('off')
     #plt.imsave(fname='old_animation_frames/frame' + str(i) + '.png', \
