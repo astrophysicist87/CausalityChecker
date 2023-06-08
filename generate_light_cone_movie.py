@@ -9,7 +9,10 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 def init():
-    image = np.zeros((image_pixel_dimension, image_pixel_dimension))
+    data = np.loadtxt(sys.argv[i+1], usecols=(1,2,5))
+    nxbins = np.rint(np.sqrt(len(data[:,0])))
+    nybins = np.rint(np.sqrt(len(data[:,1])))
+    image = np.zeros((nxbins, nybins))
     im = plt.imshow(image)
     plt.axis('off')
     return im,
