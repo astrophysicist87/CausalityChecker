@@ -10,8 +10,8 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 def init():
     data = np.loadtxt(sys.argv[1], usecols=(1,2,5))
-    nxbins = np.rint(np.sqrt(len(data[:,0])))
-    nybins = np.rint(np.sqrt(len(data[:,1])))
+    nxbins = int(np.rint(np.sqrt(len(data[:,0]))))
+    nybins = int(np.rint(np.sqrt(len(data[:,1]))))
     print(nxbins, nybins)
     image = np.zeros((nxbins, nybins))
     im = plt.imshow(image)
