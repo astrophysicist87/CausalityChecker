@@ -15,6 +15,7 @@ eDec=$4
 	mkdir frames
 	mkdir slides
 
+  # test
 	# assuming same number of lines for each tau...
 	split --lines=$3 -d --suffix-length=4 $fileName frames/frame
 	nFiles=`\ls -1 frames/frame* | wc -l`
