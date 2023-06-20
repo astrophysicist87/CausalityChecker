@@ -113,6 +113,14 @@ def generate_frames(frameNumbers):
             axs[i].set_yticks([-10,0,10])
         
 
+    orangeFraction = len(vals[np.where(vals==5)])/len(vals)
+    greenFraction = len(vals[np.where(vals==4)])/len(vals)
+    blueFraction = len(vals[np.where(vals==3)])/len(vals)
+    purpleFraction = len(vals[np.where(vals==2)])/len(vals)
+    redFraction = len(vals[np.where(vals==1)])/len(vals)
+    print(np.array([tau, orangeFraction, greenFraction, \
+                    blueFraction, purpleFraction, redFraction]))
+
 
     plt.text(0.075, 0.15, hydroString, \
         {'color': 'white', 'fontsize': 12}, transform=axs[0].transAxes,
