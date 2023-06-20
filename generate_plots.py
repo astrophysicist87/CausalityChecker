@@ -118,7 +118,7 @@ def generate_frames(frameNumbers):
     blueFraction = len(vals[np.where(vals==3)])/len(vals)
     purpleFraction = len(vals[np.where(vals==2)])/len(vals)
     redFraction = len(vals[np.where(vals==1)])/len(vals)
-    print(np.array([tau, orangeFraction, greenFraction, \
+    print("Cell fractions:", np.array([tau, orangeFraction, greenFraction, \
                     blueFraction, purpleFraction, redFraction]))
 
 
