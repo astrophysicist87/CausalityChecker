@@ -91,7 +91,7 @@ def generate_frames(frameNumbers):
         
         #==========================================================
         # this is only for debugging purposes
-        #dataToPlot = dataToPlot[np.where( (np.abs(dataToPlot[:,0])<=1.0) & (np.abs(dataToPlot[:,1])<=1.0) )]
+        dataToPlot = dataToPlot[np.where( (np.abs(dataToPlot[:,0])<=1.0) & (np.abs(dataToPlot[:,1])<=1.0) )]
         
         # histogram with each entry weighted by causality conditions
         vals = np.array([colorFunction(entry) for entry in frameData])
