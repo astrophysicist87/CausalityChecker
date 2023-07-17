@@ -66,6 +66,10 @@ def generate_frames(frameNumbers):
     for i, frameNumber in enumerate(frameNumbers):
         # load data to plot
         frameData = np.loadtxt(inpath + '/frame%(frame)04d.dat' % {'frame': frameNumber})
+        print("frameData.shape = ",frameData.shape)
+        print("frameData(vals==4).shape = ",(frameData[np.where(frameData[:,8]==0)]).shape)
+        print("frameData(vals==5).shape = ",(frameData[np.where(frameData[:,7]==0)]).shape)
+        print("frameData.shape = ",frameData.shape)
         if frameData.size != 0:
             tau = frameData[0,2]
             frameData = np.unique(frameData, axis=0)
@@ -98,7 +102,8 @@ def generate_frames(frameNumbers):
         if i <= 20:
             print("frameNumber=",frameNumber)
             np.set_printoptions(threshold=sys.maxsize)
-            print(frameData[np.where(vals==4)])
+            print("\tvals==4:",len(np.where(vals==4)))
+            print("\tvals==5:",len(np.where(vals==5)))
             np.set_printoptions(threshold=False)
 
         #print('xedges.shape =', xedges.shape)
@@ -109,12 +114,12 @@ def generate_frames(frameNumbers):
         H = H[ np.where( np.abs(yedges)<=16.52 ) ]
         print('H.shape =', H.shape)
         #print(1/0)
-        axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
-                      extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
-                      cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
         #axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
-        #              extent=[-16.52,16.52,-16.52,16.52], \
+        #              extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
         #              cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
+        axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
+                      extent=[-16.52,16.52,-16.52,16.52], \
+                      cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
                       
         plt.text(0.075, 0.925, r'$\tau = %(t)5.2f$ fm$/c$'%{'t': tau}, \
                 {'color': 'white', 'fontsize': 12}, transform=axs[i].transAxes,
