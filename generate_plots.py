@@ -74,7 +74,7 @@ def generate_frames(frameNumbers):
         print("\tvals==4:",frameData[np.where((frameData[:,8]==0) & (frameData[:,6] >= eDec))])
         print("\tvals==5:",frameData[np.where((frameData[:,7]==0) & (frameData[:,6] >= eDec))])
         np.set_printoptions(threshold=False)
-        print("frameData.shape = ",frameData.shape)
+        print("frameData.shape = ", frameData.shape)
         if frameData.size != 0:
             tau = frameData[0,2]
             frameData = np.unique(frameData, axis=0)
@@ -111,6 +111,7 @@ def generate_frames(frameNumbers):
         H = H.T
         H = H[ np.where( np.abs(yedges)<=2.0 ) ]
         print('H.shape =', H.shape)
+        print('H =', H)
         #print(1/0)
         #axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
         #              extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
