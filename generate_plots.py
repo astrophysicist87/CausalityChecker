@@ -115,7 +115,7 @@ def generate_frames(frameNumbers):
         #axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
         #              extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
         #              cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
-        axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
+        axs[i].imshow(H.astype(int), interpolation='linear', origin='low', \
                       extent=[-16.52,16.52,-16.52,16.52], \
                       cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
                       
