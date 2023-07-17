@@ -96,8 +96,9 @@ def generate_frames(frameNumbers):
                         blueFraction, purpleFraction, redFraction]))
         
         if i <= 20:
+            print("frameNumber=",frameNumber)
             np.set_printoptions(threshold=sys.maxsize)
-            print(vals[np.where(vals==4)])
+            print(frameData[np.where(vals==5)])
             np.set_printoptions(threshold=False)
 
         #print('xedges.shape =', xedges.shape)
