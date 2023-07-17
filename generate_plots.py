@@ -66,15 +66,15 @@ def generate_frames(frameNumbers):
     for i, frameNumber in enumerate(frameNumbers):
         # load data to plot
         frameData = np.loadtxt(inpath + '/frame%(frame)04d.dat' % {'frame': frameNumber})
-        print("frameNumber=",frameNumber)
-        print("\tframeData.shape = ",frameData.shape)
-        print("\tframeData(vals==4).shape = ",(frameData[np.where((frameData[:,8]==0) & (frameData[:,6] >= eDec))]).shape)
-        print("\tframeData(vals==5).shape = ",(frameData[np.where((frameData[:,7]==0) & (frameData[:,6] >= eDec))]).shape)
-        np.set_printoptions(threshold=sys.maxsize)
-        print("\tvals==4:",frameData[np.where((frameData[:,8]==0) & (frameData[:,6] >= eDec))])
-        print("\tvals==5:",frameData[np.where((frameData[:,7]==0) & (frameData[:,6] >= eDec))])
-        np.set_printoptions(threshold=False)
-        print("frameData.shape = ", frameData.shape)
+        #print("frameNumber=",frameNumber)
+        #print("\tframeData.shape = ",frameData.shape)
+        #print("\tframeData(vals==4).shape = ",(frameData[np.where((frameData[:,8]==0) & (frameData[:,6] >= eDec))]).shape)
+        #print("\tframeData(vals==5).shape = ",(frameData[np.where((frameData[:,7]==0) & (frameData[:,6] >= eDec))]).shape)
+        #np.set_printoptions(threshold=sys.maxsize)
+        #print("\tvals==4:",frameData[np.where((frameData[:,8]==0) & (frameData[:,6] >= eDec))])
+        #print("\tvals==5:",frameData[np.where((frameData[:,7]==0) & (frameData[:,6] >= eDec))])
+        #np.set_printoptions(threshold=False)
+        #print("frameData.shape = ", frameData.shape)
         if frameData.size != 0:
             tau = frameData[0,2]
             frameData = np.unique(frameData, axis=0)
@@ -91,16 +91,12 @@ def generate_frames(frameNumbers):
         
         #==========================================================
         # this is only for debugging purposes
-        dataToPlot = dataToPlot[np.where( (np.abs(dataToPlot[:,0])<=1.0) & (np.abs(dataToPlot[:,1])<=1.0) )]
+        #dataToPlot = dataToPlot[np.where( (np.abs(dataToPlot[:,0])<=1.0) & (np.abs(dataToPlot[:,1])<=1.0) )]
         
         # histogram with each entry weighted by causality conditions
         vals = np.array([colorFunction(entry) for entry in frameData])
-        #H, xedges, yedges = np.histogram2d(dataToPlot[:,0], dataToPlot[:,1], \
-        #                    bins=(nxbins, nybins), weights=vals, \
-        #                    range=[[-scalex-0.5*dx,scalex+0.5*dx],
-        #                           [-scaley-0.5*dy,scaley+0.5*dy]])
         H, xedges, yedges = np.histogram2d(dataToPlot[:,0], dataToPlot[:,1], \
-                            bins=(nxbins, nybins), \
+                            bins=(nxbins, nybins), weights=vals, \
                             range=[[-scalex-0.5*dx,scalex+0.5*dx],
                                    [-scaley-0.5*dy,scaley+0.5*dy]])
         
@@ -115,15 +111,15 @@ def generate_frames(frameNumbers):
         #print('xedges.shape =', xedges.shape)
         #print('yedges.shape =', yedges.shape)
         #print('H.shape =', H.shape)
-        H = H[ np.where( np.abs(xedges)<=1.0 ) ]
+        H = H[ np.where( np.abs(xedges)<=16.52 ) ]
         H = H.T
-        H = H[ np.where( np.abs(yedges)<=1.0 ) ]
-        print('H.shape =', H.shape)
-        np.set_printoptions(threshold=sys.maxsize)
-        print('xedges =', xedges)
-        print('yedges =', yedges)
-        print('H =', H)
-        np.set_printoptions(threshold=False)
+        H = H[ np.where( np.abs(yedges)<=16.52 ) ]
+        #print('H.shape =', H.shape)
+        #np.set_printoptions(threshold=sys.maxsize)
+        #print('xedges =', xedges)
+        #print('yedges =', yedges)
+        #print('H =', H)
+        #np.set_printoptions(threshold=False)
         #print(1/0)
         #axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
         #              extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \

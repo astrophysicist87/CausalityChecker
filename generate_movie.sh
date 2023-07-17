@@ -9,7 +9,7 @@ fileName=`basename $filePath`
 
 eDec=$4
 
-generateAnimation=false
+generateAnimation=true
 
 #===============================================================================
 (
