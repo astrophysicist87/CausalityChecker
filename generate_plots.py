@@ -115,6 +115,7 @@ def generate_frames(frameNumbers):
         H = H.T
         H = H[ np.where( np.abs(yedges)<=2.0 ) ]
         print('H.shape =', H.shape)
+        print('dataToPlot.shape =', dataToPlot.shape)
         np.set_printoptions(threshold=sys.maxsize)
         print('H =', H)
         np.set_printoptions(threshold=False)
