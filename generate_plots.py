@@ -109,12 +109,12 @@ def generate_frames(frameNumbers):
         H = H[ np.where( np.abs(yedges)<=16.52 ) ]
         print('H.shape =', H.shape)
         #print(1/0)
-        #axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
-        #              extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
-        #              cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
         axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
-                      extent=[-16.52,16.52,-16.52,16.52], \
+                      extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
                       cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
+        #axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
+        #              extent=[-16.52,16.52,-16.52,16.52], \
+        #              cmap=ListedColormap(colorsToUse), vmin=0, vmax=(len(colorsToUse)-1))
                       
         plt.text(0.075, 0.925, r'$\tau = %(t)5.2f$ fm$/c$'%{'t': tau}, \
                 {'color': 'white', 'fontsize': 12}, transform=axs[i].transAxes,
