@@ -89,6 +89,10 @@ def generate_frames(frameNumbers):
             
         dataToPlot = frameData[:,[3,4]]     # swap x and y to get correct orientation
         
+        #==========================================================
+        # this is only for debugging purposes
+        dataToPlot = dataToPlot[np.where( (np.abs(dataToPlot[:,0])<=2.0) & (np.abs(dataToPlot[:,1])<=2.0) )]
+        
         # histogram with each entry weighted by causality conditions
         vals = np.array([colorFunction(entry) for entry in frameData])
         #H, xedges, yedges = np.histogram2d(dataToPlot[:,0], dataToPlot[:,1], \
@@ -115,7 +119,6 @@ def generate_frames(frameNumbers):
         H = H.T
         H = H[ np.where( np.abs(yedges)<=2.0 ) ]
         print('H.shape =', H.shape)
-        print('dataToPlot.shape =', dataToPlot.shape)
         np.set_printoptions(threshold=sys.maxsize)
         print('H =', H)
         np.set_printoptions(threshold=False)
