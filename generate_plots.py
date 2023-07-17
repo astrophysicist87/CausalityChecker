@@ -87,9 +87,22 @@ def generate_frames(frameNumbers):
                             range=[[-scalex-0.5*dx,scalex+0.5*dx],
                                    [-scaley-0.5*dy,scaley+0.5*dy]])
         
-        print('xedges.shape =', xedges.shape)
-        print('yedges.shape =', yedges.shape)
-        print('H.shape =', H.shape)
+        orangeFraction = len(vals[np.where(vals==5)])/len(vals)
+        greenFraction = len(vals[np.where(vals==4)])/len(vals)
+        blueFraction = len(vals[np.where(vals==3)])/len(vals)
+        purpleFraction = len(vals[np.where(vals==2)])/len(vals)
+        redFraction = len(vals[np.where(vals==1)])/len(vals)
+        print("Cell fractions:", np.array([tau, orangeFraction, greenFraction, \
+                        blueFraction, purpleFraction, redFraction]))
+        
+        if i <= 20:
+            numpy.set_printoptions(threshold=sys.maxsize)
+            print(vals[np.where(vals==4)])
+            numpy.set_printoptions(threshold=False)
+
+        #print('xedges.shape =', xedges.shape)
+        #print('yedges.shape =', yedges.shape)
+        #print('H.shape =', H.shape)
         H = H[ np.where( np.abs(xedges)<=16.52 ) ]
         H = H.T
         H = H[ np.where( np.abs(yedges)<=16.52 ) ]
@@ -112,14 +125,6 @@ def generate_frames(frameNumbers):
             axs[i].set_ylabel(r'$y$ (fm)', fontsize=16)
             axs[i].set_yticks([-10,0,10])
         
-
-    orangeFraction = len(vals[np.where(vals==5)])/len(vals)
-    greenFraction = len(vals[np.where(vals==4)])/len(vals)
-    blueFraction = len(vals[np.where(vals==3)])/len(vals)
-    purpleFraction = len(vals[np.where(vals==2)])/len(vals)
-    redFraction = len(vals[np.where(vals==1)])/len(vals)
-    print("Cell fractions:", np.array([tau, orangeFraction, greenFraction, \
-                    blueFraction, purpleFraction, redFraction]))
 
 
     plt.text(0.075, 0.15, hydroString, \
