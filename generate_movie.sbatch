@@ -4,8 +4,7 @@
 #SBATCH -J serial_job            # Name of batch job
 #SBATCH -A qgp
 #SBATCH -p qgp
-#SBATCH -o serial.o%j              # Name of batch job output file
-#SBATCH -e serial.e%j              # Name of batch job output file
+#SBATCH -oe generate_movie.out              # Name of batch job output file
 
 echo 'Starting...'
 bash generate_movie.sh $causality_check_file $gridScale $gridSize $eDecoupling $dxy
