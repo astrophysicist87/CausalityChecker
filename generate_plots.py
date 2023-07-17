@@ -91,8 +91,12 @@ def generate_frames(frameNumbers):
         
         # histogram with each entry weighted by causality conditions
         vals = np.array([colorFunction(entry) for entry in frameData])
+        #H, xedges, yedges = np.histogram2d(dataToPlot[:,0], dataToPlot[:,1], \
+        #                    bins=(nxbins, nybins), weights=vals, \
+        #                    range=[[-scalex-0.5*dx,scalex+0.5*dx],
+        #                           [-scaley-0.5*dy,scaley+0.5*dy]])
         H, xedges, yedges = np.histogram2d(dataToPlot[:,0], dataToPlot[:,1], \
-                            bins=(nxbins, nybins), weights=vals, \
+                            bins=(nxbins, nybins), \
                             range=[[-scalex-0.5*dx,scalex+0.5*dx],
                                    [-scaley-0.5*dy,scaley+0.5*dy]])
         
