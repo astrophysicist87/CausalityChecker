@@ -111,7 +111,9 @@ def generate_frames(frameNumbers):
         H = H.T
         H = H[ np.where( np.abs(yedges)<=2.0 ) ]
         print('H.shape =', H.shape)
+        np.set_printoptions(threshold=sys.maxsize)
         print('H =', H)
+        np.set_printoptions(threshold=False)
         #print(1/0)
         #axs[i].imshow(H.astype(int), interpolation='nearest', origin='low', \
         #              extent=[-scalex-0.5*dx,scalex+0.5*dx,-scaley-0.5*dy,scaley+0.5*dy], \
