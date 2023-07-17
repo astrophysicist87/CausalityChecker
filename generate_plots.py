@@ -66,9 +66,14 @@ def generate_frames(frameNumbers):
     for i, frameNumber in enumerate(frameNumbers):
         # load data to plot
         frameData = np.loadtxt(inpath + '/frame%(frame)04d.dat' % {'frame': frameNumber})
-        print("frameData.shape = ",frameData.shape)
-        print("frameData(vals==4).shape = ",(frameData[np.where(frameData[:,8]==0)]).shape)
-        print("frameData(vals==5).shape = ",(frameData[np.where(frameData[:,7]==0)]).shape)
+        print("frameNumber=",frameNumber)
+        print("\tframeData.shape = ",frameData.shape)
+        print("\tframeData(vals==4).shape = ",(frameData[np.where((frameData[:,8]==0) & (frameData[:,6] >= eDec))]).shape)
+        print("\tframeData(vals==5).shape = ",(frameData[np.where((frameData[:,7]==0) & (frameData[:,6] >= eDec))]).shape)
+        np.set_printoptions(threshold=sys.maxsize)
+        print("\tvals==4:",frameData[np.where((frameData[:,8]==0) & (frameData[:,6] >= eDec))])
+        print("\tvals==5:",frameData[np.where((frameData[:,7]==0) & (frameData[:,6] >= eDec))])
+        np.set_printoptions(threshold=False)
         print("frameData.shape = ",frameData.shape)
         if frameData.size != 0:
             tau = frameData[0,2]
@@ -99,13 +104,6 @@ def generate_frames(frameNumbers):
         print("Cell fractions:", np.array([tau, orangeFraction, greenFraction, \
                         blueFraction, purpleFraction, redFraction]))
         
-        if i <= 20:
-            print("frameNumber=",frameNumber)
-            np.set_printoptions(threshold=sys.maxsize)
-            print("\tvals==4:",len(np.where(vals==4)))
-            print("\tvals==5:",len(np.where(vals==5)))
-            np.set_printoptions(threshold=False)
-
         #print('xedges.shape =', xedges.shape)
         #print('yedges.shape =', yedges.shape)
         #print('H.shape =', H.shape)
